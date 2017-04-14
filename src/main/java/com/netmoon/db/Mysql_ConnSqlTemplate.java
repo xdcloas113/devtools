@@ -24,7 +24,7 @@ public class Mysql_ConnSqlTemplate implements ConnSqlTemplate{
                 "\n" +
                 " WHERE t.constraint_type='PRIMARY KEY'\n" +
                 "\n" +
-                "  AND t.table_schema='campus-cjc'\n" +
+                "  AND t.table_schema='campus-front'\n" +
                 "\n" +
                 "  AND t.table_name='"+tableName+"'",
                 SQLUtils.DEFAULT_FORMAT_OPTION);
@@ -34,7 +34,7 @@ public class Mysql_ConnSqlTemplate implements ConnSqlTemplate{
         return SQLUtils.formatMySql(
                 "select  COLUMN_NAME,DATA_TYPE,COLUMN_COMMENT AS COMMENTS from information_schema.COLUMNS\n" +
                 "\n" +
-                "where TABLE_SCHEMA='campus-cjc'\n" +
+                "where TABLE_SCHEMA='campus-front'\n" +
                 "\n" +
                 "and TABLE_NAME='"+tableName+"'",
                 SQLUtils.DEFAULT_FORMAT_OPTION);
@@ -47,7 +47,7 @@ public class Mysql_ConnSqlTemplate implements ConnSqlTemplate{
      */
     public String getTableComments(String tableName) {
         return SQLUtils.formatMySql("" +
-                "select * from information_schema.TABLES where TABLE_SCHEMA='campus-cjc' and TABLE_NAME='" + tableName + "'",
+                "select * from information_schema.TABLES where TABLE_SCHEMA='campus-front' and TABLE_NAME='" + tableName + "'",
             SQLUtils.DEFAULT_FORMAT_OPTION);
 
     }

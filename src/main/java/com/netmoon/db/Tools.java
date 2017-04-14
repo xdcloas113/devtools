@@ -41,6 +41,9 @@ public class Tools {
         db2JavaMap.put("TIMESTAMP", "java.util.Date");
         db2JavaMap.put("NUMBER", "int");
         db2JavaMap.put("BLOB", "byte[]");
+        //mysql
+        db2JavaMap.put("tinyint", "Boolean");
+        db2JavaMap.put("datetime", "java.util.Date");
 
         configuration = new Configuration(Configuration.VERSION_2_3_23);
         configuration.setDefaultEncoding("utf-8");

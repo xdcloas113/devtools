@@ -1,29 +1,42 @@
 package ${parentPackageName}.model;
 
-import com.alibaba.fastjson.annotation.JSONField;
-import com.founder.framework.annotation.DBInfoAnnotation;
-import com.founder.framework.annotation.FieldDesc;
-import com.founder.framework.base.entity.BaseEntity;
-import com.founder.common.datedeserializer.SimpleDateDeserializer;
-import com.founder.common.dateserializer.SimpleDateSerializer;
+import io.swagger.annotations.ApiParam;
+import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import javax.ws.rs.FormParam;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.Date;
 
-public class ${entityName} extends BaseEntity implements Serializable {
+/**
+* Created by Administrator on ${.now}.
+*/
+@Entity
+@DynamicUpdate
+public class ${entityName} implements Serializable {
 	private static final long serialVersionUID = 1L;
-
 <#list columus as colume>
-    <#if !colume["COLUMN_NAME"]?lower_case?starts_with("xt_")>
-    @FormParam("${colume["COLUMN_NAME"]?lower_case}")
+    <#if colume["COLUMN_NAME"]?lower_case==("id")>
+    @Id
+    @GenericGenerator(name = "identity", strategy = "identity")
+    @GeneratedValue(generator = "identity")
+    @ApiParam(value = "${colume["COMMENTS"]!''}")
+    private ${db2JavaMap[colume["DATA_TYPE"]]} ${colume["COLUMN_NAME"]?lower_case};//${colume["COMMENTS"]!''}
+
+    </#if>
+</#list>
+<#list columus as colume>
+    <#if colume["COLUMN_NAME"]?lower_case!=("id")>
+    @ApiParam(value = "${colume["COMMENTS"]!''}")
     <#if colume["DATA_TYPE"]?lower_case?contains("date")>
-    @JSONField(format = "yyyy-MM-dd")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @JsonSerialize(using = SimpleDateSerializer.class)
-    @JsonDeserialize(using = SimpleDateDeserializer.class)
+    @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @ApiParam(value = "${colume["COMMENTS"]!''}(yyyy-MM-dd HH:mm:ss)")
     </#if>
     private ${db2JavaMap[colume["DATA_TYPE"]]} ${colume["COLUMN_NAME"]?lower_case};//${colume["COMMENTS"]!''}
     

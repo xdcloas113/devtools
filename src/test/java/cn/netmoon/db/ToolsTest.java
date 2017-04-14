@@ -22,8 +22,8 @@ public class ToolsTest {
         String parentPackageName = "cn.netmoon.campus.base";//包名:model,sqlmap及dao的上级包名
         Tools tool=new Tools(parentPackageName,filePath);
         String[] tablenames = {
-        		"school",
-              "school_info"
+        		"exam",
+              "exam_room"
         };
         for(String tablename : tablenames){
             tool.create(tablename);
