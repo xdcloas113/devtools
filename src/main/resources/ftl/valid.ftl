@@ -12,13 +12,21 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
+import org.hibernate.validator.constraints.Range;
 
 /**
 * Created by Administrator on ${.now}.
 */
 
 public class ${entityName}Valid implements Serializable {
-private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
+
+    @Range(min = 1, max = Integer.MAX_VALUE)
+    @ApiParam(value = "总页数(查询用）")
+    private Integer page;
+    @Range(min = 1, max = Integer.MAX_VALUE)
+    @ApiParam(value = "每页查询记录数(查询用）")
+    private Integer num;
 <#list columus as colume>
     <#if colume["COLUMN_NAME"]?lower_case==("id")>
     @ApiParam(value = "${colume["COMMENTS"]!''}")
@@ -50,5 +58,18 @@ private static final long serialVersionUID = 1L;
     }
     </#if>
 </#list>
+    //set page&num
+    public Integer getPage(){
+        return page;
+    }
+    public void setPage(Integer page) {
+        this.page = page;
+    }
+    public Integer getNum(){
+        return num;
+    }
+    public void setNum(Integer num) {
+        this.num = num;
+    }
 
 }
