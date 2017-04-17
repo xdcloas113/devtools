@@ -1,66 +1,48 @@
 package ${parentPackageName}.dao;
 
+import ${parentPackageName}.model.${entityName};
+import cn.netmoon.common.dao.MySqlBaseDao;
+import cn.netmoon.common.util.CollectionUtils;
+import cn.netmoon.common.web.Page;
+import org.springframework.stereotype.Repository;
+import org.springframework.util.StringUtils;
+
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.stereotype.Repository;
-
-import com.founder.framework.base.dao.BaseDaoImpl;
-import com.founder.framework.utils.EasyUIPage;
-import ${parentPackageName}.model.${entityName};
-
 @Repository
-public class ${entityName}Dao extends BaseDaoImpl{
-
-    /**
-    * 新增业务对象
-    */
-    public void insert(${entityName} entity) {
-        super.insert("${paramName}.save",entity);
-    }
-
-    /**
-    * 根据主键ID修改对象
-    */
-    public void update(${entityName} entity) {
-        super.update("${paramName}.update",entity);
-    }
-
-    /**
-    * 通过主键ID注销对象，只是修改注销状态为（已注销）
-    */
-    public void delete(${entityName} entity) {
-        super.delete("${paramName}.delete",entity);
-    }
+public class ${entityName}Dao  extends MySqlBaseDao<${entityName}>{
 
     /**
     * 通过主键ID查询单个业务实体对象
+    * @param id
+    * @return
     */
-    public ${entityName} queryById(String ${pk}) {
-        return (${entityName})super.queryForObject("${paramName}.queryById",${pk});
+    public ${entityName} get${entityName}ByNo(String id) {
+        return findOneByHql("from ${entityName} where id=?0, id");
     }
 
     /**
-    * 根据业务实体查询业务实体列表
+    * 分页查询业务对象列表
+    * @param page
+    * @param map
+    * @return
     */
-    public List<${entityName}> queryByEntity(${entityName} entity) {
-        return super.queryForList("${paramName}.queryByEntity",entity);
-    }
-    
-    /**
-    * 根据业务实体查询数量
-    */
-    public Integer queryCountByEntity(${entityName} entity){
-		return (Integer)super.queryForObject("${paramName}.queryCountByEntity", entity);
-	}
+    public Page query${entityName}Page(Page page, Map map) {
+        StringBuffer sql = new StringBuffer("select * from ${tableName} where 1=1");
 
-    /**
-    * 查询分页对象
-    */
-    public EasyUIPage queryPageList(Map<String, Object> map, EasyUIPage page) {
-        Integer count=(Integer)queryForObject("${paramName}.queryPageCount", map);
-        page.setTotal(count==null?0:count);
-        page.setRows(queryForList("${paramName}.queryPageList", map));
-        return page;
+        <#list columus as colume>
+        if (!StringUtils.isEmpty(map.get("${transformString(colume["COLUMN_NAME"])}"))) {
+            sql.append(" and ${colume["COLUMN_NAME"]?lower_case}=:${transformString(colume["COLUMN_NAME"])}");
+        }
+        </#list>
+        //删除参数中的多余参数
+        CollectionUtils.retainAll(map,
+        <#list columus as colume>
+            "${transformString(colume["COLUMN_NAME"])}"<#if colume_index < columus?size-1>,</#if>
+        </#list>);
+        List list = findBySql(sql.toString(), page.getStart(), page.getNum(), map);
+        int count = FOUND_ROWS();
+        return page.setList(list, count);
     }
 }

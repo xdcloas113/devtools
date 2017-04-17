@@ -1,4 +1,4 @@
-package ${parentPackageName}.model;
+package ${parentPackageName}.validate;
 
 import io.swagger.annotations.ApiParam;
 import org.hibernate.annotations.DynamicUpdate;
@@ -16,24 +16,16 @@ import java.util.Date;
 /**
 * Created by Administrator on ${.now}.
 */
-@Entity
-@DynamicUpdate
-public class ${entityName} implements Serializable {
-	private static final long serialVersionUID = 1L;
+
+public class ${entityName}Valid implements Serializable {
+private static final long serialVersionUID = 1L;
 <#list columus as colume>
     <#if colume["COLUMN_NAME"]?lower_case==("id")>
-    @Id
-    @GenericGenerator(name = "identity", strategy = "identity")
-    @GeneratedValue(generator = "identity")
     @ApiParam(value = "${colume["COMMENTS"]!''}")
     private ${db2JavaMap[colume["DATA_TYPE"]]} ${colume["COLUMN_NAME"]?lower_case};//${colume["COMMENTS"]!''}
-
     </#if>
 </#list>
 <#list columus as colume>
-    <#if colume["DATA_TYPE"]?lower_case?contains("tinyint")>
-    @Column(columnDefinition = "bit")
-    </#if>
     <#if colume["COLUMN_NAME"]?lower_case!=("id")>
         <#if !colume["DATA_TYPE"]?lower_case?contains("date")>
     @ApiParam(value = "${colume["COMMENTS"]!''}")
@@ -41,9 +33,9 @@ public class ${entityName} implements Serializable {
     @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiParam(value = "${colume["COMMENTS"]!''}(yyyy-MM-dd HH:mm:ss)")
-    </#if>
+        </#if>
     private ${db2JavaMap[colume["DATA_TYPE"]]} ${transformString(colume["COLUMN_NAME"])};//${colume["COMMENTS"]!''}
-    
+
     </#if>
 </#list>
 

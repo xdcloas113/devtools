@@ -19,15 +19,16 @@ public class ToolsTest {
     @Test
     public void testCreateService() throws Exception {
         String filePath = "c:/workflow";//生成的文件目录
-        String parentPackageName = "cn.netmoon.campus.base";//包名:model,sqlmap及dao的上级包名
+        String parentPackageName = "cn.netmoon.campus.exam";//包名:model,sqlmap及dao的上级包名
         Tools tool=new Tools(parentPackageName,filePath);
         String[] tablenames = {
-        		"exam",
-              "exam_room"
+        		"score","exam_student","exam_teacher","exam","exam_room","exam_arrange","exam_place_arrange",
+            "exam_class_arrange","exam_area"
         };
         for(String tablename : tablenames){
             tool.create(tablename);
             tool.doModel();
+            tool.doValid();
             tool.doDao();
             tool.doService();
             tool.doServiceImpl();

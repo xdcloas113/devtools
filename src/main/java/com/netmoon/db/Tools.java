@@ -44,6 +44,8 @@ public class Tools {
         //mysql
         db2JavaMap.put("tinyint", "Boolean");
         db2JavaMap.put("datetime", "java.util.Date");
+        //decimal(20,2)
+        db2JavaMap.put("decimal", "java.math.BigDecimal");
 
         configuration = new Configuration(Configuration.VERSION_2_3_23);
         configuration.setDefaultEncoding("utf-8");
@@ -59,6 +61,7 @@ public class Tools {
             allTemplates.put("serviceImpl", configuration.getTemplate("serviceImpl.ftl"));
             allTemplates.put("dao", configuration.getTemplate("dao.ftl"));
             allTemplates.put("model", configuration.getTemplate("model.ftl"));
+            allTemplates.put("validate", configuration.getTemplate("valid.ftl"));
             allTemplates.put("sqlmap", configuration.getTemplate("sqlmap.ftl"));
             allTemplates.put("qwjs", configuration.getTemplate("qwjs.ftl"));
         } catch (IOException e) {
@@ -94,6 +97,8 @@ public class Tools {
         List<Map<String, Object>> columes = DbUtil.INSTANCE.queryColumes(tableName);
         ftlmap.put("columus",columes);
         ftlmap.put("db2JavaMap",db2JavaMap);
+        ftlmap.put("transformString",new TransformStringTemplateMethodModel());
+        ftlmap.put("buildMethodSuffixString",new BuildMethodSuffixName());
     }
 
     //首字母转小写
@@ -122,6 +127,8 @@ public class Tools {
             fileName = entityName  + ".xml";
         }else if(packageName.equals("model")){
             fileName = entityName + ".java";
+        }else if(packageName.equals("validate")){
+            fileName = entityName+"Valid" + ".java";
         }else if(packageName.equals("qwjs")){
             fileName = entityName + ".txt";
         }else if(packageName.equals("serviceImpl")){
@@ -192,6 +199,9 @@ public class Tools {
 
     public void doModel () {
         createFile(ftlmap,"model");
+    }
+    public void doValid () {
+        createFile(ftlmap,"validate");
     }
 
     public void doService () {

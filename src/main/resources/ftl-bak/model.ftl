@@ -31,30 +31,26 @@ public class ${entityName} implements Serializable {
     </#if>
 </#list>
 <#list columus as colume>
-    <#if colume["DATA_TYPE"]?lower_case?contains("tinyint")>
-    @Column(columnDefinition = "bit")
-    </#if>
     <#if colume["COLUMN_NAME"]?lower_case!=("id")>
-        <#if !colume["DATA_TYPE"]?lower_case?contains("date")>
     @ApiParam(value = "${colume["COMMENTS"]!''}")
-        <#elseif colume["DATA_TYPE"]?lower_case?contains("date")>
+    <#if colume["DATA_TYPE"]?lower_case?contains("date")>
     @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiParam(value = "${colume["COMMENTS"]!''}(yyyy-MM-dd HH:mm:ss)")
     </#if>
-    private ${db2JavaMap[colume["DATA_TYPE"]]} ${transformString(colume["COLUMN_NAME"])};//${colume["COMMENTS"]!''}
+    private ${db2JavaMap[colume["DATA_TYPE"]]} ${colume["COLUMN_NAME"]?lower_case};//${colume["COMMENTS"]!''}
     
     </#if>
 </#list>
 
 <#list columus as colume>
     <#if !colume["COLUMN_NAME"]?lower_case?starts_with("xt_")>
-    public ${db2JavaMap[colume["DATA_TYPE"]]} get${buildMethodSuffixString(colume["COLUMN_NAME"])}(){
-        return ${transformString(colume["COLUMN_NAME"])};
+    public ${db2JavaMap[colume["DATA_TYPE"]]} get${colume["COLUMN_NAME"]?lower_case?cap_first}(){
+        return ${colume["COLUMN_NAME"]?lower_case};
     }
 
-    public void set${buildMethodSuffixString(colume["COLUMN_NAME"])}(${db2JavaMap[colume["DATA_TYPE"]]} ${transformString(colume["COLUMN_NAME"])}) {
-        this.${transformString(colume["COLUMN_NAME"])} = ${transformString(colume["COLUMN_NAME"])};
+    public void set${colume["COLUMN_NAME"]?lower_case?cap_first}(${db2JavaMap[colume["DATA_TYPE"]]} ${colume["COLUMN_NAME"]?lower_case}) {
+        this.${colume["COLUMN_NAME"]?lower_case} = ${colume["COLUMN_NAME"]?lower_case};
     }
     </#if>
 </#list>
