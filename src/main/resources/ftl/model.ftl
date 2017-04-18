@@ -37,12 +37,10 @@ public class ${entityName} implements Serializable {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiParam(value = "${colume["COMMENTS"]!''}(yyyy-MM-dd HH:mm:ss)")
         <#elseif colume["DATA_TYPE"]?lower_case?contains("tinyint")>
-    @ApiParam(value = "禁用启用",allowableValues = "true,false")
+    @ApiParam(value = "${colume["COMMENTS"]!''}",allowableValues = "true,false")
     @Column(columnDefinition = "bit")
         <#else >
-        @ApiParam(value = "${colume["COMMENTS"]!''}")
-
-    </#if>
+    @ApiParam(value = "${colume["COMMENTS"]!''}") </#if>
     private ${db2JavaMap[colume["DATA_TYPE"]]} ${transformString(colume["COLUMN_NAME"])};//${colume["COMMENTS"]!''}
     
     </#if>
