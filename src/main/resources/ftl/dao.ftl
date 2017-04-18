@@ -30,7 +30,8 @@ public class ${entityName}Dao  extends MySqlBaseDao<${entityName}>{
     */
     public Page query${entityName}Page(Page page, Map map) {
         StringBuffer sql = new StringBuffer("select * from ${tableName} where 1=1");
-
+        <#--map.remove("page");
+        map.remove("num");-->
         <#list columus as colume>
         if (!StringUtils.isEmpty(map.get("${transformString(colume["COLUMN_NAME"])}"))) {
             sql.append(" and ${colume["COLUMN_NAME"]?lower_case}=:${transformString(colume["COLUMN_NAME"])}");

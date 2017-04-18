@@ -31,16 +31,17 @@ public class ${entityName} implements Serializable {
     </#if>
 </#list>
 <#list columus as colume>
-    <#if colume["DATA_TYPE"]?lower_case?contains("tinyint")>
-    @Column(columnDefinition = "bit")
-    </#if>
     <#if colume["COLUMN_NAME"]?lower_case!=("id")>
-        <#if !colume["DATA_TYPE"]?lower_case?contains("date")>
-    @ApiParam(value = "${colume["COMMENTS"]!''}")
-        <#elseif colume["DATA_TYPE"]?lower_case?contains("date")>
+        <#if colume["DATA_TYPE"]?lower_case?contains("date")>
     @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiParam(value = "${colume["COMMENTS"]!''}(yyyy-MM-dd HH:mm:ss)")
+        <#elseif colume["DATA_TYPE"]?lower_case?contains("tinyint")>
+    @ApiParam(value = "禁用启用",allowableValues = "true,false")
+    @Column(columnDefinition = "bit")
+        <#else >
+        @ApiParam(value = "${colume["COMMENTS"]!''}")
+
     </#if>
     private ${db2JavaMap[colume["DATA_TYPE"]]} ${transformString(colume["COLUMN_NAME"])};//${colume["COMMENTS"]!''}
     

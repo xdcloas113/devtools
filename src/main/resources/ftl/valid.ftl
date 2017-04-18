@@ -21,12 +21,12 @@ import org.hibernate.validator.constraints.Range;
 public class ${entityName}Valid implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @Range(min = 1, max = Integer.MAX_VALUE)
+   <#-- @Range(min = 1, max = Integer.MAX_VALUE)
     @ApiParam(value = "总页数(查询用）")
     private Integer page;
     @Range(min = 1, max = Integer.MAX_VALUE)
     @ApiParam(value = "每页查询记录数(查询用）")
-    private Integer num;
+    private Integer num;-->
 <#list columus as colume>
     <#if colume["COLUMN_NAME"]?lower_case==("id")>
     @ApiParam(value = "${colume["COMMENTS"]!''}")
@@ -35,13 +35,17 @@ public class ${entityName}Valid implements Serializable {
 </#list>
 <#list columus as colume>
     <#if colume["COLUMN_NAME"]?lower_case!=("id")>
-        <#if !colume["DATA_TYPE"]?lower_case?contains("date")>
-    @ApiParam(value = "${colume["COMMENTS"]!''}")
-        <#elseif colume["DATA_TYPE"]?lower_case?contains("date")>
+        <#if colume["DATA_TYPE"]?lower_case?contains("date")>
     @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiParam(value = "${colume["COMMENTS"]!''}(yyyy-MM-dd HH:mm:ss)")
-        </#if>
+        <#elseif colume["DATA_TYPE"]?lower_case?contains("tinyint")>
+    @ApiParam(value = "${colume["COMMENTS"]!''}",allowableValues = "true,false")
+    @Column(columnDefinition = "bit")
+        <#else >
+    @ApiParam(value = "${colume["COMMENTS"]!''}")
+
+    </#if>
     private ${db2JavaMap[colume["DATA_TYPE"]]} ${transformString(colume["COLUMN_NAME"])};//${colume["COMMENTS"]!''}
 
     </#if>
@@ -59,7 +63,7 @@ public class ${entityName}Valid implements Serializable {
     </#if>
 </#list>
     //set page&num
-    public Integer getPage(){
+   <#-- public Integer getPage(){
         return page;
     }
     public void setPage(Integer page) {
@@ -70,6 +74,6 @@ public class ${entityName}Valid implements Serializable {
     }
     public void setNum(Integer num) {
         this.num = num;
-    }
+    }-->
 
 }
