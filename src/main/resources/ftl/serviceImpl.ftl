@@ -48,6 +48,8 @@ public class ${entityName}ServiceImpl implements ${entityName}Service{
 
         ${entityName} ${entityName?uncap_first} = new ${entityName}();
         BeanUtils.copyProperties(req, ${entityName?uncap_first});
+        if(StringUtils.isEmpty(req.getDeleted()))
+            ${entityName?uncap_first}.setDeleted(false);
         ${entityName?uncap_first}Dao.save(${entityName?uncap_first});
     }
 
