@@ -12,7 +12,7 @@ import java.util.HashMap;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
-import cn.netmoon.framework.annotation.FieldDesc;
+//import cn.netmoon.framework.annotation.FieldDesc;
 import org.aspectj.util.FileUtil;
 import org.springframework.core.LocalVariableTableParameterNameDiscoverer;
 
@@ -272,10 +272,10 @@ public class RestApiGeneratorTool {
         Field[] fields = obj.getClass().getDeclaredFields();
         for (Field field : fields) {
             //Field field = clazz.getDeclaredField("id");
-            FieldDesc myFieldAnnotation = field.getAnnotation(FieldDesc.class);
-            if(myFieldAnnotation == null) continue;
+            //FieldDesc myFieldAnnotation = field.getAnnotation(FieldDesc.class);
+           // if(myFieldAnnotation == null) continue;
             sb.append("\n").append("       " + field.getName() + ":");
-            sb.append("\n").append("         description: " + myFieldAnnotation.value());
+            //sb.append("\n").append("         description: " + myFieldAnnotation.value());
             String type = field.getType().getSimpleName().toLowerCase();
             type = type.substring(type.lastIndexOf(".") + 1);
             if(type.contains("long")) type = "number";

@@ -1,84 +1,89 @@
 package ${parentPackageName}.service.impl;
-
-import ${parentPackageName}.dao.${entityName}Dao;
-import ${parentPackageName}.model.${entityName};
+import com.scmofit.gifm.common.BeanUtils;
+import com.scmofit.gifm.common.EasyUIPage;
 import ${parentPackageName}.service.${entityName}Service;
-import ${parentPackageName}.validate.${entityName}Valid;
-import cn.netmoon.common.cache.Cache;
-import cn.netmoon.common.util.BeanUtils;
-import cn.netmoon.common.web.Page;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
+import ${parentPackageName}.system.model.dao.${entityName}Mapper;
+import c${parentPackageName}.system.model.entities.${entityName};
+import ${parentPackageName}.system.model.entities.${entityName}Criteria;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StringUtils;
+import lombok.extern.apachecommons.CommonsLog;
 
-import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 
 /**
- * Created by Administrator on 2017/4/12.
- */
+* @program: gifm-sub
+* @description:
+* @author: KaiFaBu008
+* @create: 2018-05-15 11:40
+**/
+@CommonsLog
 @Service
-public class ${entityName}ServiceImpl implements ${entityName}Service{
-
-    @Autowired
-    private ${entityName}Dao ${entityName?uncap_first}Dao;
-    @Autowired
-    private Cache cache;
-
-    @Autowired
-    private ApplicationContext ac;
-    private ${entityName}Service proxy;
-
-    @PostConstruct
-    public void getProxy() {
-        proxy = ac.getBean(this.getClass());
+//@Transactional
+public class ${entityName}ServiceImpl implements ${entityName}Service {
+    @Resource
+    private ${entityName}Mapper ${entityName?uncap_first}Mapper;
+    @Override
+    public EasyUIPage selectPage(int page, int rows, ${entityName} fundQuery) {
+        Map<String, Object> map = (Map<String, Object>) BeanUtils.toMap(fundQuery);
+        int pageSize = (page - 1) * rows;
+        //Subject currentUser = SecurityUtils.getSubject();
+        //SysUser user = (SysUser) currentUser.getPrincipal();
+        ${entityName}Criteria criteriaObj = new ${entityName}Criteria();
+        ${entityName}Criteria.Criteria criteria= criteriaObj.createCriteria();
+        criteria.andBktIdIsNull();
+        criteriaObj.setPageIndex(page);
+        criteriaObj.setPageSize(rows);
+        List<${entityName}> lst = ${entityName?uncap_first}Mapper.getPage(criteriaObj);
+        EasyUIPage easyUIPage = new EasyUIPage();
+        int total = (int) ${entityName?uncap_first}Mapper.countByExample(criteriaObj);
+        easyUIPage.setTotal(total);
+        if (total > 0) {
+            easyUIPage.setRows(lst);
+        }
+        return easyUIPage;
     }
 
-    /**
-    * 新增业务对象
-    * @param req
-    * @param campusId
-    * @return
-    */
-    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
-    public void create${entityName}(${entityName}Valid req, Integer campusId) {
-
-        ${entityName} ${entityName?uncap_first} = new ${entityName}();
-        BeanUtils.copyProperties(req, ${entityName?uncap_first});
-        if(StringUtils.isEmpty(req.getDeleted()))
-            ${entityName?uncap_first}.setDeleted(false);
-        ${entityName?uncap_first}Dao.save(${entityName?uncap_first});
+    @Override
+    public int removeByID(String id) {
+        return ${entityName?uncap_first}Mapper.deleteByPrimaryKey(id);
     }
 
-    /**
-     * 根据主键ID修改对象
-     * @param req
-     * @param campusId
-     */
-    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
-    public void update${entityName}(${entityName}Valid req, Integer campusId) {
-        ${entityName} ${entityName?uncap_first} = new ${entityName}();//${entityName?uncap_first}Dao.get${entityName}ByNo(req.getId());
-        BeanUtils.copyProperties(req, ${entityName?uncap_first});
-        ${entityName?uncap_first}Dao.merge(${entityName?uncap_first});
+    @Override
+    public int removeByIDs(Set<String> ids) {
+        //TODO:
+        return 0;
     }
-    /**
-     * 通过主键ID注销对象，只是修改注销状态为（已注销）
-     * @param req
-     */
-    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
-    public void delete${entityName}(${entityName}Valid req) {
-        ${entityName} ${entityName?uncap_first} = ${entityName?uncap_first}Dao.get(req.getId());
-        ${entityName?uncap_first}.setDeleted(true);
-        ${entityName?uncap_first}Dao.update(${entityName?uncap_first});
+
+    @Override
+    public int save(${entityName} obj) {
+        String id = obj.getId();
+        if(obj.getDeleted() == null){
+            obj.setDeleted((short) 0);
+        }
+
+        id = UUID.randomUUID().toString();
+        obj.setId(id);
+        ${entityName?uncap_first}Mapper.insert(obj);
+
+        return 1;
     }
-    /**
-     * edit exam
-     */
-    @Transactional(readOnly = true)
-    public Page query${entityName}Page(Page page, Map map) {
-        return ${entityName?uncap_first}Dao.query${entityName}Page(page,map);
+
+    @Override
+    public int updateByID(${entityName} obj) {
+        return ${entityName?uncap_first}Mapper.updateByPrimaryKeySelective(obj);
+    }
+
+    @Override
+    public ${entityName} getById(String id) {
+        return ${entityName?uncap_first}Mapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public List<${entityName}> getMany() {
+        return ${entityName?uncap_first}Mapper.selectByExample(new ${entityName}Criteria());
     }
 }
