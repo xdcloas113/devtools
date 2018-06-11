@@ -91,7 +91,7 @@ public class ${entityName}Controller {
     */
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ServerResponse delete${entityName}(@PathVariable("id") String id) {
-        int res = ${entityName?uncap_first}Service.removeByID(id):
+        int res = ${entityName?uncap_first}Service.removeByID(id);
         if (res != 1) {
             return new ServerResponse(HttpCode.error,"删除失败！","删除失败！");
         }
@@ -110,7 +110,7 @@ public class ${entityName}Controller {
         for (int i = 0; i < strings.length; i++) {
             deleteIdList.add(strings[i]);
         }
-        int res = ${entityName?uncap_first}Service.removeByIDs(deleteIdList)://TODO:该方法对应的sql暂时需要手工书写
+        int res = ${entityName?uncap_first}Service.removeByIDs(deleteIdList);//TODO:该方法对应的sql暂时需要手工书写
         if (res != 1) {
             return new ServerResponse(HttpCode.error,"删除失败！","删除失败！");
         }
