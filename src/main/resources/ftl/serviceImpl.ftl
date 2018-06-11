@@ -2,9 +2,9 @@ package ${parentPackageName}.service.impl;
 import com.scmofit.gifm.common.BeanUtils;
 import com.scmofit.gifm.common.EasyUIPage;
 import ${parentPackageName}.service.${entityName}Service;
-import ${parentPackageName}.system.model.dao.${entityName}Mapper;
-import c${parentPackageName}.system.model.entities.${entityName};
-import ${parentPackageName}.system.model.entities.${entityName}Criteria;
+import ${parentPackageName}.dao.${entityName}Mapper;
+import ${parentPackageName}.entities.${entityName};
+import ${parentPackageName}.entities.${entityName}Criteria;
 import org.springframework.stereotype.Service;
 import lombok.extern.apachecommons.CommonsLog;
 
@@ -16,9 +16,9 @@ import java.util.UUID;
 
 /**
 * @program: gifm-sub
-* @description:
-* @author: KaiFaBu008
-* @create: 2018-05-15 11:40
+* @description: 自动生成, 待用户编辑 //TODO:描述待补充
+* @author: robot
+* @create: ${.now}
 **/
 @CommonsLog
 @Service
@@ -49,7 +49,13 @@ public class ${entityName}ServiceImpl implements ${entityName}Service {
 
     @Override
     public int removeByID(String id) {
+
+        <#if nameOfClass("${entityName}.id") == "String">
         return ${entityName?uncap_first}Mapper.deleteByPrimaryKey(id);
+        <#else>
+        //int id = obj.getId(); //非字符串的,自增或其他方式
+        return ${entityName?uncap_first}Mapper.deleteByPrimaryKey(Integer.parseInt(id.trim()));
+        </#if>
     }
 
     @Override
@@ -60,15 +66,14 @@ public class ${entityName}ServiceImpl implements ${entityName}Service {
 
     @Override
     public int save(${entityName} obj) {
-        String id = obj.getId();
-        if(obj.getDeleted() == null){
-            obj.setDeleted((short) 0);
-        }
 
-        id = UUID.randomUUID().toString();
+        <#if nameOfClass("${entityName}.id") == "String">
+        String id = UUID.randomUUID().toString();
         obj.setId(id);
+        <#else>
+        //int id = obj.getId(); //非字符串的,自增或其他方式
+        </#if>
         ${entityName?uncap_first}Mapper.insert(obj);
-
         return 1;
     }
 
@@ -79,7 +84,12 @@ public class ${entityName}ServiceImpl implements ${entityName}Service {
 
     @Override
     public ${entityName} getById(String id) {
+    <#if nameOfClass("${entityName}.id") == "String">
         return ${entityName?uncap_first}Mapper.selectByPrimaryKey(id);
+    <#else>
+        //int id = obj.getId(); //非字符串的//TODO:需要确认
+        return ${entityName?uncap_first}Mapper.selectByPrimaryKey(Integer.parseInt(id.trim()));
+    </#if>
     }
 
     @Override

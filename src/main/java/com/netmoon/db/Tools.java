@@ -1,5 +1,6 @@
 package com.netmoon.db;
 
+import com.netmoon.freemarker.GetClsNameTMM;
 import com.netmoon.util.connection.ClassPathUtil;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -50,6 +51,7 @@ public class Tools {
         configuration = new Configuration(Configuration.VERSION_2_3_23);
         configuration.setDefaultEncoding("utf-8");
         try {
+            System.out.println(ClassPathUtil.getClassesPath(Tools.class) + "/ftl/");
             configuration.setDirectoryForTemplateLoading(new File(
                 ClassPathUtil.getClassesPath(Tools.class) + "/ftl/"));
         } catch (IOException e) {
@@ -59,6 +61,7 @@ public class Tools {
         try {
             allTemplates.put("service", configuration.getTemplate("service.ftl"));
             allTemplates.put("serviceImpl", configuration.getTemplate("serviceImpl.ftl"));
+            allTemplates.put("controller", configuration.getTemplate("controller.ftl"));
             allTemplates.put("dao", configuration.getTemplate("dao.ftl"));
             allTemplates.put("model", configuration.getTemplate("model.ftl"));
             allTemplates.put("validate", configuration.getTemplate("valid.ftl"));
@@ -99,6 +102,7 @@ public class Tools {
         ftlmap.put("db2JavaMap",db2JavaMap);
         ftlmap.put("transformString",new TransformStringTemplateMethodModel());
         ftlmap.put("buildMethodSuffixString",new BuildMethodSuffixName());
+        ftlmap.put("nameOfClass", new GetClsNameTMM());
     }
 
     //首字母转小写
@@ -131,9 +135,13 @@ public class Tools {
             fileName = entityName+"Valid" + ".java";
         }else if(packageName.equals("qwjs")){
             fileName = entityName + ".txt";
+        }else if(packageName.equals("service")){
+            fileName = entityName + toUpperCaseFirstOne(packageName) + ".java";
         }else if(packageName.equals("serviceImpl")){
             fileName = entityName + toUpperCaseFirstOne(packageName) + ".java";
             path = path.replace("serviceImpl","service/impl");
+        }else if(packageName.equals("controller")){
+            fileName = entityName + "Controller.java";
         }else{
             fileName = entityName + toUpperCaseFirstOne(packageName) + ".java";
         }
@@ -222,6 +230,10 @@ public class Tools {
     
     public void doQwjs(String fileName){
     	createFile(ftlmap,"qwjs",fileName);
+    }
+
+    public void doController () {
+        createFile(ftlmap,"controller");
     }
 
 }

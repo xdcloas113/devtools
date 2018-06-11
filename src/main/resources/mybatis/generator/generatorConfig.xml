@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <properties resource="resources.properties" />
+    <!--<classPathEntry location="classpath:mybatis/generator/lib/mysql-connector-java-5.1.46.jar"/>-->
+    <context id="context" targetRuntime="MyBatis3" defaultModelType="flat">
+        <!-- 自动识别数据库关键字，默认false -->
+        <property name="autoDelimitKeywords" value="true"/>
+        <!-- 生成的Java文件的编码 -->
+        <property name="javaFileEncoding" value="UTF-8"/>
+        <!-- 格式化java代码 -->
+        <property name="javaFormatter" value="org.mybatis.generator.api.dom.DefaultJavaFormatter"/>
+        <!-- 格式化XML代码 -->
+        <property name="xmlFormatter" value="org.mybatis.generator.api.dom.DefaultXmlFormatter"/>
+        <!--可以使用``包括字段名，避免字段名与sql保留字冲突报错 -->
+        <property name="beginningDelimiter" value="&quot;"/>
+        <property name="endingDelimiter" value="&quot;"/>
+
+        <!-- 增加爱Models Serializable实现 -->
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+
+        <!-- include the plugin -->
+        <plugin type="com.mybatis.page.plugin.LombokPlugin"/>
+        <!--<plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+            <property name="mappers" value="com.scmofit.gifm.dao.TkBaseMapper"/>
+        </plugin>-->
+        <!-- 分页插件 -->
+        <plugin type="com.mybatis.page.plugin.SelectByPagePlugin"></plugin>
+
+        <!-- 此处是将Example改名为Criteria 当然 想改成什么都行 -->
+        <plugin type="org.mybatis.generator.plugins.RenameExampleClassPlugin">
+            <property name="searchString" value="Example$"/>
+            <property name="replaceString" value="Criteria"/>
+        </plugin>
+        <!--<plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"></plugin>-->
+
+        <commentGenerator>
+            <!--<property name="suppressAllComments" value="true" />-->
+            <property name="suppressDate" value="true"/>
+        </commentGenerator>
+
+        <!-- jdbc连接信息 -->
+        <!--<jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"
+            connectionURL="jdbc:oracle:thin:@39.108.60.228:1521/TESTREP" userId="WTRJ"
+            password="Wtrj123456" />-->
+        <jdbcConnection driverClass="${jdbc.driverClassName}"
+                        connectionURL="${jdbc.url}" userId="${jdbc.username}"
+                        password="${jdbc.password}">
+        </jdbcConnection>
+        <!-- 生成对象 -->
+        <javaModelGenerator targetProject="${target.java.project}"
+                            targetPackage="${target.package}.entities">
+            <property name="enableSubPackages" value="true"/>
+        </javaModelGenerator>
+        <!-- 生成用于查询的Example对象 -->
+        <sqlMapGenerator targetProject="${target.java.project}"
+                         targetPackage="${target.package}.mapper">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+        <!-- 生成DAO的类文件以及配置文件 -->
+        <javaClientGenerator targetProject="${target.java.project}"
+                             targetPackage="${target.package}.dao" type="XMLMAPPER">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <!--tables -->
+        <table tableName="slow_log" domainObjectName="SlowLog">
+            <!--<property name="useActualColumnNames" value="true"/>-->
+            <!--<generatedKey  column="ID"  sqlStatement="select uuid_short()"   identity="false"/>-->
+        </table>
+
+    </context>
+</generatorConfiguration>

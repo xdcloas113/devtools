@@ -1,11 +1,17 @@
 package ${parentPackageName}.service;
 
 import com.scmofit.gifm.common.EasyUIPage;
-import ${parentPackageName}.model.${entityName};
+import ${parentPackageName}.entities.${entityName};
 
+import java.util.Set;
 import java.util.List;
-import java.util.Map;
 
+/**
+* @program: gifm-sub
+* @description: 自动生成, 待用户编辑 //TODO:描述待补充
+* @author: robot
+* @create: ${.now}
+**/
 public interface ${entityName}Service {
 
     /**

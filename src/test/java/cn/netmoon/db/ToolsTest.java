@@ -5,6 +5,8 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ResourceBundle;
+
 /**
  * Package: com.netmoon.db
  * ClassName: ToolsTest
@@ -18,8 +20,12 @@ public class ToolsTest {
 
     @Test
     public void testCreateService() throws Exception {
-        String filePath = "c:/workflow";//生成的文件目录
-        String parentPackageName = "com.test.oo";//包名:model,sqlmap及dao的上级包名
+        ResourceBundle bundle = ResourceBundle.getBundle("resources");
+        String target_package = bundle.getString("target.package");
+        String target_java_project = bundle.getString("target.java.project");
+
+        String filePath = target_java_project;//生成的文件目录
+        String parentPackageName = target_package;//包名:model,sqlmap及dao的上级包名
         Tools tool=new Tools(parentPackageName,filePath);
         String[] tablenames = {
         		"slow_log"
@@ -32,6 +38,7 @@ public class ToolsTest {
             tool.doService();
             tool.doServiceImpl();
             //tool.doSqlmap();
+            tool.doController();
         }
     }
 }
