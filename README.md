@@ -14,11 +14,11 @@
     jdbc.username=root
     jdbc.password=root
  
- ## 2.配置文件路径
-      //生成代码的写入路径
-      target.java.project=d:/mybati/project/src/java/java
-      //包路径
-      target.package=com.scmofit.gifm.system
+## 2.配置文件路径
+    //生成代码的写入路径
+    target.java.project=d:/mybati/project/src/java/java
+    //包路径
+    target.package=com.scmofit.gifm.system
       
 ## 3.配置需要生成的数据库表集
      //修改src/test/java/com/autocode/db/ToolsTest,可配置多个数据库表
