@@ -2,7 +2,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.founder</groupId>
+    <groupId>com.monkey</groupId>
     <artifactId>devtools</artifactId>
     <version>1.0.1</version>
     <packaging>jar</packaging>
@@ -190,7 +190,7 @@
 
     </dependencies>
     <build>
-        <finalName>gifm</finalName>
+        <finalName>DevTools</finalName>
         <resources>
             <resource>
                 <directory>src/main/java</directory>
