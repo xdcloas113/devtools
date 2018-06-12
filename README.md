@@ -27,13 +27,12 @@
      
      
 # 二. 生成常用的javabean、sql(xml)和dao(mapper)
-
-![image](http://192.168.1.148:8080/open-source/DevTools/blob/dev/images/mybatis-generator.png)
     1. 打开Maven Projects, 打开Plugins, 打开mybatis-generator工具
     2. 选中mybatis-generator:generate, 又单击运行
-    
+
+![Alt text](http://192.168.1.148:8080/open-source/DevTools/blob/dev/images/mybatis-generator.png)
 # 三. 打开target.java.project所设定的目录,查看生成的代码
-![image](http://192.168.1.148:8080/open-source/DevTools/blob/dev/images/code-structure.png)
+![Alt text](http://192.168.1.148:8080/open-source/DevTools/blob/dev/images/code-structure.png)
 # 四. Tips
     Controllers中设置的URL路径可能过长, 可根据实际情况修改
     
