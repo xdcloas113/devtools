@@ -11,22 +11,22 @@
     <url>http://maven.apache.org</url>
 
     <!--发布到私服-->
-    <!--<distributionManagement>
+    <distributionManagement>
         <repository>
-            &lt;!&ndash;发行版&ndash;&gt;
-            <id>nexus-releases</id>
-            <name>NexusReleaseRepository</name>
-            <url>http://192.168.11.12:8081/nexus/content/repositories/releases/</url>
+            <!--发行版-->
+            <id>personal</id>
+            <name>personal</name>
+            <url>http://192.168.1.148:8081/repository/personal/</url>
             <uniqueVersion>false</uniqueVersion>
         </repository>
         <snapshotRepository>
-            &lt;!&ndash;快照版本&ndash;&gt;
-            <id>nexus-snapshots</id>
-            <name>NexusSnapshotRepository</name>
-            <url>http://192.168.11.12:8081/nexus/content/repositories/snapshots/</url>
+            <!--快照版本-->
+            <id>personal</id>
+            <name>personal</name>
+            <url>http://192.168.1.148:8081/repository/personal/</url>
             <uniqueVersion>false</uniqueVersion>
         </snapshotRepository>
-    </distributionManagement>-->
+    </distributionManagement>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
