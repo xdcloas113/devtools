@@ -9,7 +9,12 @@ import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.Map;
-
+/**
+* @program: gifm-sub
+* @description: 自动生成, 待用户编辑 //TODO:描述待补充
+* @author: 兰芷不芳，荃蕙为茅
+* @create: ${.now}
+**/
 @Repository
 public class ${entityName}Dao  extends MySqlBaseDao<${entityName}>{
 

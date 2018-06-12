@@ -1,4 +1,4 @@
-package cn.netmoon.test;
+package com.autocode.test;
 
 import java.io.FileOutputStream;
 

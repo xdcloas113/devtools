@@ -15,9 +15,11 @@ import java.util.Date;
 import org.hibernate.validator.constraints.Range;
 
 /**
-* Created by Administrator on ${.now}.
-*/
-
+* @program: gifm-sub
+* @description: 自动生成, 待用户编辑 //TODO:描述待补充
+* @author: 兰芷不芳，荃蕙为茅
+* @create: ${.now}
+**/
 public class ${entityName}Valid implements Serializable {
     private static final long serialVersionUID = 1L;
 

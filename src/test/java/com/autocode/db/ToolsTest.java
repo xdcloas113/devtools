@@ -1,4 +1,4 @@
-package cn.netmoon.db;
+package com.autocode.db;
 
 import com.netmoon.db.Tools;
 import org.junit.Test;
@@ -19,7 +19,7 @@ public class ToolsTest {
     private static Logger log = LoggerFactory.getLogger(ToolsTest.class);
 
     @Test
-    public void testCreateService() throws Exception {
+    public void testCreateProject() throws Exception {
         ResourceBundle bundle = ResourceBundle.getBundle("resources");
         String target_package = bundle.getString("target.package");
         String target_java_project = bundle.getString("target.java.project");

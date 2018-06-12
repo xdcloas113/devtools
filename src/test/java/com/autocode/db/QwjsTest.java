@@ -1,4 +1,4 @@
-package cn.netmoon.db;
+package com.autocode.db;
 
 import com.netmoon.db.Tools;
 import org.junit.Test;

@@ -14,8 +14,11 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
-* Created by Administrator on ${.now}.
-*/
+* @program: gifm-sub
+* @description: 自动生成, 待用户编辑 //TODO:描述待补充
+* @author: 兰芷不芳，荃蕙为茅
+* @create: ${.now}
+**/
 @Entity
 @DynamicUpdate
 public class ${entityName} implements Serializable {

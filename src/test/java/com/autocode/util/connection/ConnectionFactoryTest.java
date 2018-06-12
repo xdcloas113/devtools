@@ -1,4 +1,4 @@
-package cn.netmoon.util.connection;
+package com.autocode.util.connection;
 
 import com.netmoon.util.connection.ConnectionFactory;
 import org.junit.Test;
