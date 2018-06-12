@@ -25,6 +25,12 @@
      String[] tablenames = { "slow_log","..."  };     
      //运行junit测试,执行testCreateProject()方法的测试
      
+## 4. 修改配置src\main\resources\mybatis\generator\generatorConfig.xml 
+    //与## 3同步添加数据库表
+     <table tableName="slow_log" domainObjectName="SlowLog">
+        <!--<property name="useActualColumnNames" value="true"/>-->
+        <!--<generatedKey  column="ID"  sqlStatement="select uuid_short()"   identity="false"/>-->
+     </table>    
      
 # 二. 生成常用的javabean、sql(xml)和dao(mapper)
     1. 打开Maven Projects, 打开Plugins, 打开mybatis-generator工具
