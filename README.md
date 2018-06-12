@@ -31,4 +31,7 @@
     2. 选中mybatis-generator:generate, 又单击运行
     
 # 三. 打开target.java.project所设定的目录,查看生成的代码
+
+# 四. Tips
+    Controllers中设置的URL路径可能过长, 可根据实际情况修改
     
