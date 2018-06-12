@@ -4,6 +4,7 @@
 #功能说明：
 	1. 默认该包下的工具主要用于将数据库的表生成常用的javabean、sql和dao，但因数据库兼容问题，实现较复杂，故
 	改造后用于生成service、serviceImpl 以及controller， 以简化工作量，更专注于业务生成.
+	
 	2. 使用Mybatis-Generator插件来生成常用的javabean、sql(xml)和dao(mapper)，实现请使用tools.java来生成
 #一.修改/src/main/resources/resources.properties:	
 
