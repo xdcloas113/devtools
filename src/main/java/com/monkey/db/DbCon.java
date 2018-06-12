@@ -1,4 +1,4 @@
-package com.netmoon.db;
+package com.monkey.db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

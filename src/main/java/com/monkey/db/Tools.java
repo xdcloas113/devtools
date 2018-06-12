@@ -1,7 +1,7 @@
-package com.netmoon.db;
+package com.monkey.db;
 
-import com.netmoon.freemarker.GetClsNameTMM;
-import com.netmoon.util.connection.ClassPathUtil;
+import com.monkey.freemarker.GetClsNameTMM;
+import com.monkey.util.connection.ClassPathUtil;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import org.slf4j.Logger;

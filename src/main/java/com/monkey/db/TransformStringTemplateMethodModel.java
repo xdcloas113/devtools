@@ -1,4 +1,4 @@
-package com.netmoon.db;
+package com.monkey.db;
 
 import freemarker.template.TemplateMethodModel;
 import freemarker.template.TemplateModelException;

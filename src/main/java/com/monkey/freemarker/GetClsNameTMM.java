@@ -1,4 +1,4 @@
-package com.netmoon.freemarker;
+package com.monkey.freemarker;
 
 import freemarker.template.TemplateMethodModelEx;
 import freemarker.template.TemplateModelException;

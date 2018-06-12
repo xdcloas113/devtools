@@ -1,6 +1,6 @@
 package com.autocode.util.connection;
 
-import com.netmoon.util.connection.ConnectionFactory;
+import com.monkey.util.connection.ConnectionFactory;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

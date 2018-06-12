@@ -1,7 +1,6 @@
 package com.autocode.db;
 
-import com.netmoon.db.Tools;
-import org.junit.Test;
+import com.monkey.db.Tools;
 
 /**
  * Package: com.netmoon.db
@@ -13,7 +12,7 @@ import org.junit.Test;
  */
 public class QwjsTest {
 
-    @Test
+   // @Test
     public void testCreateService() throws Exception {
         String filePath = "D:/db2file";//生成的文件目录
         String parentPackageName = "";//包名:model,sqlmap及dao的上级包名
