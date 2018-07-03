@@ -36,7 +36,7 @@
     1. 打开Maven Projects, 打开Plugins, 打开mybatis-generator工具
     2. 选中mybatis-generator:generate, 又单击运行
 
-![操作图片](http://192.168.0.50/common/DevTools/raw/dev/images/mybatis-generator.png)
+![操作图片](http://192.168.0.50:9080/common/DevTools/raw/dev/images/mybatis-generator.png)
 # 三. 打开target.java.project所设定的目录,查看生成的代码
 ![代码结构](http://192.168.0.50:9080/common/DevTools/raw/dev/images/code-structure.png)
 # 四. Tips
