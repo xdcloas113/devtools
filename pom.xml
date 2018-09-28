@@ -11,20 +11,20 @@
     <url>http://maven.apache.org</url>
 
     <!--发布到私服-->
-    <distributionManagement>
-        <repository>
-            <id>nexus</id>
-            <name>Releases</name>
-            <url>http://192.168.1.148:8081/repository/maven-releases</url>
-        </repository>
-        <snapshotRepository>
-            <!--快照版本-->
-            <id>nexus</id>
-            <name>snapshots</name>
-            <url>http://192.168.1.148:8081/repository/maven-snapshots/</url>
-            <uniqueVersion>false</uniqueVersion>
-        </snapshotRepository>
-    </distributionManagement>
+    <!--<distributionManagement>-->
+        <!--<repository>-->
+            <!--<id>nexus</id>-->
+            <!--<name>Releases</name>-->
+            <!--<url>http://192.168.1.148:8081/repository/maven-releases</url>-->
+        <!--</repository>-->
+        <!--<snapshotRepository>-->
+            <!--&lt;!&ndash;快照版本&ndash;&gt;-->
+            <!--<id>nexus</id>-->
+            <!--<name>snapshots</name>-->
+            <!--<url>http://192.168.1.148:8081/repository/maven-snapshots/</url>-->
+            <!--<uniqueVersion>false</uniqueVersion>-->
+        <!--</snapshotRepository>-->
+    <!--</distributionManagement>-->
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -174,17 +174,27 @@
             <artifactId>pagehelper</artifactId>
             <version>5.1.4</version>
         </dependency>
-        <dependency>
-            <groupId>mybatis-pagenation-plugin</groupId>
-            <artifactId>com.mybatis.page.plugin</artifactId>
-            <version>1.0.0.0</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/tk.mybatis/mapper -->
+        <!-- 1111-->
+        <!--<dependency>-->
+            <!--<groupId>mybatis-pagenation-plugin</groupId>-->
+            <!--<artifactId>com.mybatis.page.plugin</artifactId>-->
+            <!--<version>2.0.0.0</version>-->
+            <!--<scope>system</scope>-->
+            <!--<systemPath>${basedir}/src/main/resources/mybatis/generator/mybatis-pagenation-plugin-2.0.0.0.jar</systemPath>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>com.github.pagehelper</groupId>-->
+            <!--<artifactId>pagehelper</artifactId>-->
+            <!--<version>5.1.4</version>-->
+        <!--</dependency>-->
+    <!-- https://mvnrepository.com/artifact/tk.mybatis/mapper -->
         <dependency>
             <groupId>tk.mybatis</groupId>
             <artifactId>mapper</artifactId>
             <version>4.0.2</version>
         </dependency>
+
+
 
     </dependencies>
     <build>
@@ -235,10 +245,17 @@
                         <artifactId>pagehelper-spring-boot-starter</artifactId>
                         <version>1.0.0</version>
                     </dependency>
+                    <!--<dependency>-->
+                    <!--<groupId>com.github.pagehelper</groupId>-->
+                    <!--<artifactId>pagehelper</artifactId>-->
+                    <!--<version>5.1.4</version>-->
+                    <!--</dependency>-->
                     <dependency>
                         <groupId>mybatis-pagenation-plugin</groupId>
                         <artifactId>com.mybatis.page.plugin</artifactId>
-                        <version>1.0.0.0</version>
+                        <version>2.0.0.0</version>
+                        <scope>system</scope>
+                        <systemPath>${basedir}/src/main/resources/mybatis/generator/mybatis-pagenation-plugin-2.0.0.0.jar</systemPath>
                     </dependency>
                     <!-- https://mvnrepository.com/artifact/tk.mybatis/mapper -->
                     <dependency>
@@ -251,7 +268,6 @@
                         <artifactId>mysql-connector-java</artifactId>
                         <version>5.1.44</version>
                     </dependency>
-
 
                 </dependencies>
             </plugin>

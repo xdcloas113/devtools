@@ -67,6 +67,10 @@ public class Tools {
             allTemplates.put("validate", configuration.getTemplate("valid.ftl"));
             allTemplates.put("sqlmap", configuration.getTemplate("sqlmap.ftl"));
             allTemplates.put("qwjs", configuration.getTemplate("qwjs.ftl"));
+            allTemplates.put("add", configuration.getTemplate("add.ftl"));
+            allTemplates.put("edit", configuration.getTemplate("edit.ftl"));
+            allTemplates.put("view", configuration.getTemplate("view.ftl"));
+            allTemplates.put("pojo", configuration.getTemplate("pojo.ftl"));
         } catch (IOException e) {
             e.printStackTrace();
             throw new RuntimeException(e);
@@ -142,7 +146,17 @@ public class Tools {
             path = path.replace("serviceImpl","service/impl");
         }else if(packageName.equals("controller")){
             fileName = entityName + "Controller.java";
-        }else{
+        }else if(packageName.equals("add")){
+            fileName = entityName + "Add.jsp";
+        }else if(packageName.equals("edit")){
+            fileName = entityName + "Edit.jsp";
+        }else if(packageName.equals("view")){
+            fileName = entityName + "view.jsp";
+        }else if(packageName.equals("pojo")){
+            fileName = entityName + "pojo.jsp";
+        }
+
+        else{
             fileName = entityName + toUpperCaseFirstOne(packageName) + ".java";
         }
 
@@ -234,6 +248,66 @@ public class Tools {
 
     public void doController () {
         createFile(ftlmap,"controller");
+    }
+
+
+    public void doAdd () {
+        createJspFile(ftlmap,"add");
+    }
+
+    public void doEdit () {
+        createJspFile(ftlmap,"edit");
+    }
+
+    public void doView () {
+        createJspFile(ftlmap,"view");
+    }
+    public void dopojo () {
+        createJspFile(ftlmap,"pojo");
+    }
+
+
+    private String createJspFile(Map<?, ?> dataMap, String packageName) {
+
+        String path = this.filePath + "/" + parentPackageName.replace(".", "/") + "/" + entityName;
+
+        String fileName;
+
+        if(packageName.equals("add")){
+            fileName =  "add.jsp";
+        }else if(packageName.equals("edit")){
+            fileName =  "edit.jsp";
+        }else if(packageName.equals("view")){
+            fileName =  "view.jsp";
+        }else if(packageName.equals("pojo")){
+            fileName =  "pojo.jsp";
+        }else {
+            fileName =  "err.jsp";
+        }
+
+
+        path = path.replace("//", "/").trim();
+
+        File dir = new File(path);
+        log.info(path);
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+
+        File file = new File(path + "/" + fileName);
+
+        Template t = allTemplates.get(packageName);
+        try {
+            Writer w = new OutputStreamWriter(new FileOutputStream(file), "utf-8");
+            t.process(dataMap, w);
+            w.flush();
+            w.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new RuntimeException(ex);
+        }
+
+        return path;
     }
 
 }

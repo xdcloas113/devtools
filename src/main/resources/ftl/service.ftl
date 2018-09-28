@@ -1,10 +1,13 @@
 package ${parentPackageName}.service;
 
-import com.scmofit.gifm.common.EasyUIPage;
 import ${parentPackageName}.entities.${entityName};
 
-import java.util.Set;
+import com.yqy.midend.orgperm.util.json.JsonUtil;
+
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 
 /**
 * @program: gifm-sub
@@ -17,7 +20,7 @@ public interface ${entityName}Service {
     /**
     * 查询分页对象
     */
-    EasyUIPage selectPage(int page, int rows, ${entityName} fundQuery);
+    JsonUtil selectPage(int page, int rows, Map<String, Object> queryMap,JsonUtil jsonUtil);
 
     /**
     * 通过主键ID注销对象，只是修改注销状态为（已注销）

@@ -1,18 +1,25 @@
 package ${parentPackageName}.service.impl;
-import com.scmofit.gifm.common.BeanUtils;
-import com.scmofit.gifm.common.EasyUIPage;
+
+import com.yqy.midend.orgperm.common.StringFirst;
+
 import ${parentPackageName}.service.${entityName}Service;
 import ${parentPackageName}.dao.${entityName}Mapper;
 import ${parentPackageName}.entities.${entityName};
 import ${parentPackageName}.entities.${entityName}Criteria;
-import org.springframework.stereotype.Service;
+import com.yqy.midend.orgperm.state.FinalJson;
+import com.yqy.midend.orgperm.util.json.ExtLimit;
+import com.yqy.midend.orgperm.util.json.JsonUtil;
 import lombok.extern.apachecommons.CommonsLog;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.UUID;
 
 /**
 * @program: gifm-sub
@@ -27,24 +34,55 @@ public class ${entityName}ServiceImpl implements ${entityName}Service {
     @Resource
     private ${entityName}Mapper ${entityName?uncap_first}Mapper;
     @Override
-    public EasyUIPage selectPage(int page, int rows, ${entityName} fundQuery) {
-        Map<String, Object> map = (Map<String, Object>) BeanUtils.toMap(fundQuery);
-        int pageSize = (page - 1) * rows;
+    public JsonUtil selectPage(int page, int rows, Map<String, Object> map,JsonUtil jsonUtil) {
+        <#--Map<String, Object> map = (Map<String, Object>) BeanUtils.toMap(infoQuery);-->
+
+        <#--int pageSize = (page - 1) * rows;-->
         //Subject currentUser = SecurityUtils.getSubject();
         //SysUser user = (SysUser) currentUser.getPrincipal();
         ${entityName}Criteria criteriaObj = new ${entityName}Criteria();
         ${entityName}Criteria.Criteria criteria= criteriaObj.createCriteria();
-        criteria.andBktIdIsNull();
+        map.forEach((k,v)->{
+        try {
+            Field pd =${entityName}.class.getDeclaredField(k);
+            Class<?> type = pd.getType();
+            Method beanMethod ;
+            if(type == String.class){
+                beanMethod = criteria.getClass().getMethod("and"+ StringFirst.firstCharUp(k)+"Like",type);
+                beanMethod.invoke(criteria,"%"+v+"%");
+            }else{
+                beanMethod = criteria.getClass().getMethod("and"+ StringFirst.firstCharUp(k)+"EqualTo",type);
+                beanMethod.invoke(criteria,v);
+            }
+        } catch (NoSuchFieldException e) {
+        e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+        e.printStackTrace();
+        } catch (IllegalAccessException e) {
+        e.printStackTrace();
+        } catch (InvocationTargetException e) {
+        e.printStackTrace();
+        }
+        });
         criteriaObj.setPageIndex(page);
         criteriaObj.setPageSize(rows);
-        List<${entityName}> lst = ${entityName?uncap_first}Mapper.getPage(criteriaObj);
-        EasyUIPage easyUIPage = new EasyUIPage();
-        int total = (int) ${entityName?uncap_first}Mapper.countByExample(criteriaObj);
-        easyUIPage.setTotal(total);
-        if (total > 0) {
-            easyUIPage.setRows(lst);
+        ExtLimit e = jsonUtil.getExtlimit();
+        if(!e.getSort().equals("string")){
+            criteriaObj.setOrderByClause(e.getSort()+"  "+e.getDir());
         }
-        return easyUIPage;
+
+        int total = (int) ${entityName?uncap_first}Mapper.countByExample(criteriaObj);
+        List<${entityName}> lst = ${entityName?uncap_first}Mapper.selectPage(criteriaObj);
+        if(total > 0){
+            jsonUtil.setData(lst);
+            jsonUtil.getExtlimit().setCount(total);
+            jsonUtil.getInfo().setStatus(FinalJson.STATUS_OK);
+            jsonUtil.getInfo().setMessage("请求成功");
+        }else {
+            jsonUtil.getInfo().setStatus(FinalJson.STATUS_NOTACCEPTABLE);
+            jsonUtil.getInfo().setMessage("请求失败");
+        }
+        return jsonUtil;
     }
 
     @Override

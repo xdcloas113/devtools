@@ -23,8 +23,8 @@ public class Mysql_ConnSqlTemplate implements ConnSqlTemplate{
                 " USING (constraint_name,table_schema,table_name)\n" +
                 "\n" +
                 " WHERE t.constraint_type='PRIMARY KEY'\n" +
-                "\n" +
-                "  AND t.table_schema='test'\n" +
+//                "\n" +
+//                "  AND t.table_schema='test'\n" +
                 "\n" +
                 "  AND t.table_name='"+tableName+"'",
                 SQLUtils.DEFAULT_FORMAT_OPTION);
@@ -33,10 +33,11 @@ public class Mysql_ConnSqlTemplate implements ConnSqlTemplate{
     public String queryColumesSql(String tableName){
         return SQLUtils.formatMySql(
                 "select  COLUMN_NAME,DATA_TYPE,COLUMN_COMMENT AS COMMENTS from information_schema.COLUMNS\n" +
+//                "\n" +
+//                "where TABLE_SCHEMA='test'\n" +
                 "\n" +
-                "where TABLE_SCHEMA='test'\n" +
-                "\n" +
-                "and TABLE_NAME='"+tableName+"'",
+//                "and TABLE_NAME='"+tableName+"'",
+                "where TABLE_NAME='"+tableName+"'",
                 SQLUtils.DEFAULT_FORMAT_OPTION);
     }
 
@@ -47,7 +48,8 @@ public class Mysql_ConnSqlTemplate implements ConnSqlTemplate{
      */
     public String getTableComments(String tableName) {
         return SQLUtils.formatMySql("" +
-                "select * from information_schema.TABLES where TABLE_SCHEMA='test' and TABLE_NAME='" + tableName + "'",
+                "select * from information_schema.TABLES where  TABLE_NAME='" + tableName + "'",
+//                "select * from information_schema.TABLES where TABLE_SCHEMA='test' and TABLE_NAME='" + tableName + "'",
             SQLUtils.DEFAULT_FORMAT_OPTION);
 
     }
