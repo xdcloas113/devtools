@@ -1,5 +1,5 @@
 package com.monkey.util.connection;
 
 public enum DbType{
-    Mysql,Oracle,Undefined
+    Mysql,Oracle,SqlServer,Undefined
 }

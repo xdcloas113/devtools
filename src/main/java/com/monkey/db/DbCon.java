@@ -45,6 +45,10 @@ public class DbCon {
 			driverName = "com.mysql.jdbc.Driver";
 			queryAllCols = "select COLUMN_NAME from information_schema.columns where table_name='" + tableName+ "'";
 		}
+		else if ("sqlserver".equals(databaseType)) {
+			driverName = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
+			queryAllCols = "select COLUMN_NAME from information_schema.columns where table_name=''"+ tableName+ "'";
+		}
 		
 		Parms.put("driverName", driverName);
 		Parms.put("queryAllCols", queryAllCols);

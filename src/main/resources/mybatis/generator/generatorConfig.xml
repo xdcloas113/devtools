@@ -3,8 +3,10 @@
         PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
-    <!--<classPathEntry location="E:\JavaProject\zhongxiaoProject\政府基金管理系统\gifm\src\main\resources\mybatis\generator\lib\mysql-connector-java-5.1.28-bin.jar"/>-->
-    <classPathEntry location="D:\Development tools\maven-repository\mysql\mysql-connector-java\5.1.46\mysql-connector-java-5.1.46.jar"/>
+    <!-- jar 包位置-->
+    <!--<classPathEntry location="D:\Development tools\maven-repository\mysql\mysql-connector-java\5.1.46\mysql-connector-java-5.1.46.jar"/>-->
+    <!--<classPathEntry location="D:\Development tools\maven-repository\com/microsoft\sqlserver\mssql-jdbc\6.4.0.jre8\mssql-jdbc-6.4.0.jre8.jar"/>-->
+    <classPathEntry location="${jdbc.driverLocation}"/>
     <context id="context" targetRuntime="MyBatis3" defaultModelType="flat">
         <!-- 自动识别数据库关键字，默认false -->
         <property name="autoDelimitKeywords" value="true"/>
@@ -43,30 +45,37 @@
         </commentGenerator>
 
         <!-- jdbc连接信息 -->
-        <!--<jdbcConnection driverClass="com.mysql.jdbc.Driver"-->
-                        <!--connectionURL="jdbc:mysql://192.168.0.50:3306/yqycloud" userId="root"-->
-                        <!--password="yqy123456">-->
-        <!--</jdbcConnection>-->
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://101.207.248.146:53306/yqycloud?useUnicode=true&amp;characterEncoding=utf8&amp;useSSL=false" userId="root"
-                        password="root">
+        <jdbcConnection driverClass="${jdbc.driverClassName}"
+                        connectionURL="${jdbc.url}"
+                        userId="${jdbc.username}"
+                        password="${jdbc.password}">
         </jdbcConnection>
+        <!--<jdbcConnection driverClass="com.microsoft.sqlserver.jdbc.SQLServerDriver"-->
+                        <!--connectionURL="jdbc:sqlserver://125.71.224.110:3673;databaseName=GIFM"-->
+                        <!--userId="sa"-->
+                        <!--password="SCsme202">-->
+        <!--</jdbcConnection>-->
         <!-- 生成对象 -->
         <javaModelGenerator targetProject="src\main\java"
-                            targetPackage="com.yqy.midend.orgperm.entities">
+                            targetPackage="com.scmofit.gifm.pojo">
             <property name="enableSubPackages" value="true"/>
         </javaModelGenerator>
         <!-- 生成用于查询的Example对象 -->
         <sqlMapGenerator targetProject="src\main\resources"
-                         targetPackage="mapper">
+                         targetPackage="mapperSecond">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
         <!-- 生成DAO的类文件以及配置文件 -->
         <javaClientGenerator targetProject="src\main\java"
-                             targetPackage="com.yqy.midend.orgperm.dao" type="XMLMAPPER">
+                             targetPackage="com.scmofit.gifm.dao" type="XMLMAPPER">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
+        <!-- 生成表 对应的名字 -->
+        <table tableName="sys_user" domainObjectName="SysUser">
+            <property name="useActualColumnNames" value="true"/>
+            <generatedKey  column="id"  sqlStatement="sqlServer"   identity="true"/>
+        </table>
         <!--<table tableName="bk_dict" domainObjectName="BkDict">-->
             <!--<property name="useActualColumnNames" value="true"/>-->
             <!--<generatedKey  column="id"  sqlStatement="MySql" identity="true"/>-->
@@ -77,10 +86,10 @@
         <!--<generatedKey  column="id"  sqlStatement="MySql" identity="true"/>-->
         <!--</table>-->
 
-        <table tableName="bk_file" domainObjectName="BkFile">
-        <property name="useActualColumnNames" value="true"/>
-        <generatedKey  column="id"  sqlStatement="MySql" identity="true"/>
-        </table>
+        <!--<table tableName="bk_file" domainObjectName="BkFile">-->
+        <!--<property name="useActualColumnNames" value="true"/>-->
+        <!--<generatedKey  column="id"  sqlStatement="MySql" identity="true"/>-->
+        <!--</table>-->
 
         <!--<table tableName="bk_menu" domainObjectName="BkMenu">-->
         <!--<property name="useActualColumnNames" value="true"/>-->
@@ -102,10 +111,10 @@
         <!--<generatedKey  column="id"  sqlStatement="MySql" identity="true"/>-->
         <!--</table>-->
 
-        <table tableName="bk_page_item" domainObjectName="BkPageItem">
-        <property name="useActualColumnNames" value="true"/>
-        <generatedKey  column="id"  sqlStatement="MySql" identity="true"/>
-        </table>
+        <!--<table tableName="bk_page_item" domainObjectName="BkPageItem">-->
+        <!--<property name="useActualColumnNames" value="true"/>-->
+        <!--<generatedKey  column="id"  sqlStatement="MySql" identity="true"/>-->
+        <!--</table>-->
 
         <!--<table tableName="bk_perm_file" domainObjectName="BkPermFile">-->
         <!--<property name="useActualColumnNames" value="true"/>-->

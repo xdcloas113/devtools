@@ -49,7 +49,9 @@ public enum ConnectionFactory {
             return DbType.Mysql;
         }else if(driverName.contains("oracle")){
             return DbType.Oracle;
-        }else{
+        }else if (driverName.contains("sqlserver")) {
+            return DbType.SqlServer;
+        } else{
             return DbType.Undefined;
         }
     }

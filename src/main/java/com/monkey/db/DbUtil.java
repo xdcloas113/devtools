@@ -29,6 +29,8 @@ public enum DbUtil {
 				connSqlTemplate = new Mysql_ConnSqlTemplate();
 			}else if(ConnectionFactory.INSTANCE.getDriverName().equals(DbType.Oracle)){
 				connSqlTemplate = new Oracle_ConnSqlTemplate();
+			}else if (ConnectionFactory.INSTANCE.getDriverName().equals(DbType.SqlServer)) {
+				connSqlTemplate = new SqlServer_ConnSqlTemplate();
 			}else if(ConnectionFactory.INSTANCE.getDriverName().equals(DbType.Undefined)){
 				connSqlTemplate = null;
 			}
@@ -74,7 +76,26 @@ public enum DbUtil {
 		String sql = connSqlTemplate.getTableComments(tableName);
 		log.debug("\n{}","comments sql: " + sql);
 		List<Map<String, Object>> list = exeute(sql);
-		String comments = list.get(0).get("TABLE_COMMENT").toString();
+		String comments = null;
+		String dataType = null;
+		//todo 稀巴烂这里
+		try{
+			comments = list.get(0).get("TABLE_COMMENT").toString();
+			dataType ="Mysql";
+		}catch (Exception e){
+			log.debug("不是Mysql");
+		}
+		try{
+			comments = list.get(0).get("TABLE_NAME").toString();
+			dataType = "SqlServer";
+		}catch (Exception e){
+			log.debug("不是SqlServer");
+		}
+		if (dataType.contains("Mysql")  ) {
+			comments =list.get(0).get("TABLE_COMMENT").toString();
+		}else if (dataType.contains( "SqlServer") ) {
+			comments = list.get(0).get("TABLE_NAME").toString();
+		}
 //		log.debug("\n{}",pk);
 		return comments;
 	}

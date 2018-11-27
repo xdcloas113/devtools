@@ -1,5 +1,6 @@
 package com.autocode.db;
 
+import com.monkey.db.DbUtil;
 import junit.framework.TestCase;
 import junit.framework.TestResult;
 import org.slf4j.Logger;
@@ -25,8 +26,9 @@ public class DbConTest extends TestCase {
 
     //@Test
     public void testGetKeyColumn() throws Exception {
-        //String pk = DbUtil.INSTANCE.getOracleKeyColumn("SYFW_FWZPB");
-        //assertEquals("ZPID",pk);
+//        String pk = DbUtil.INSTANCE.getOracleKeyColumn("sys_user");
+//        assertEquals("ZPID",pk);
+//        System.out.println("11");
     }
 
     //@Test

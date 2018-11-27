@@ -63,13 +63,13 @@ public class Tools {
             allTemplates.put("serviceImpl", configuration.getTemplate("serviceImpl.ftl"));
             allTemplates.put("controller", configuration.getTemplate("controller.ftl"));
             allTemplates.put("dao", configuration.getTemplate("dao.ftl"));
-            allTemplates.put("model", configuration.getTemplate("model.ftl"));
-            allTemplates.put("validate", configuration.getTemplate("valid.ftl"));
+//            allTemplates.put("model", configuration.getTemplate("model.ftl"));
+//            allTemplates.put("validate", configuration.getTemplate("valid.ftl"));
             allTemplates.put("sqlmap", configuration.getTemplate("sqlmap.ftl"));
             allTemplates.put("qwjs", configuration.getTemplate("qwjs.ftl"));
-            allTemplates.put("add", configuration.getTemplate("add.ftl"));
-            allTemplates.put("edit", configuration.getTemplate("edit.ftl"));
-            allTemplates.put("view", configuration.getTemplate("view.ftl"));
+//            allTemplates.put("add", configuration.getTemplate("add.ftl"));
+//            allTemplates.put("edit", configuration.getTemplate("edit.ftl"));
+//            allTemplates.put("view", configuration.getTemplate("view.ftl"));
             allTemplates.put("pojo", configuration.getTemplate("pojo.ftl"));
         } catch (IOException e) {
             e.printStackTrace();
