@@ -4,8 +4,7 @@
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
-# Package Files #
-*.jar
+# Package Files *.jar #
 *.war
 *.ear
 *.iml
@@ -17,3 +16,9 @@ hs_err_pid*
 
 # Created by .ignore support plugin (hsz.mobi)
 /target/
+
+
+#git修改策略#
+#git rm -r --cached .#
+#git add .#
+#git commit -m 'update .gitignore' .#
