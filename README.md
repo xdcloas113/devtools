@@ -38,11 +38,12 @@
     2. 选中mybatis-generator:generate, 又单击运行
     ---------------------------- 或者
     直接运行 src/test/java/com/autocode/db/ToolsTest  添加自己需要的生成类型
+    
+    软件替换jar包，
+    1.toolsTest能生成controller server dao xml(自行修改\resources\ftl\sqlmap.ftl;) 不能单独生成实体需要用
+    插件generatorConfig.xml生成实体
         
 
-![操作图片](http://192.168.0.50:9080/common/DevTools/raw/dev/images/mybatis-generator.png)
-# 三. 打开target.java.project所设定的目录,查看生成的代码
-![代码结构](http://192.168.0.50:9080/common/DevTools/raw/dev/images/code-structure.png)
 # 四. Tips
     Controllers中设置的URL路径可能过长, 可根据实际情况修改
     

@@ -28,7 +28,7 @@ public class ToolsTest {
         String parentPackageName = target_package;//包名:model,sqlmap及dao的上级包名
         Tools tool=new Tools(parentPackageName,filePath);
         String[] tablenames = {
-                "sys_user"
+                "sys_notice",
 //                "bk_file","bk_page_item"
 //                "bk_employee","bk_employee_org"
 //                "cr_device_data","cm_order","dev_base","sso_trace","sys_annex","sys_annex_type",
@@ -42,7 +42,7 @@ public class ToolsTest {
         };
         for(String tablename : tablenames){
             tool.create(tablename);
-            //tool.doModel();
+//            tool.doModel();
             //tool.doValid();
 //            tool.doDao();
 //            tool.doService();
@@ -64,8 +64,7 @@ public class ToolsTest {
         String parentPackageName = target_package;//包名:model,sqlmap及dao的上级包名
         Tools tool=new Tools(parentPackageName,filePath);
         String[] tablenames = {
-                "sys_user",
-
+                "sys_notice",
 //                "bk_file","bk_page_item"
 //                "cr_device","bk_tenant","bk_role",
 //        		"bk_dict","bk_dict_mgmt","bk_file","bk_menu","bk_operate","bk_org"
@@ -77,11 +76,11 @@ public class ToolsTest {
         };
         for(String tablename : tablenames){
             tool.create(tablename);
-            tool.doController();
+//            tool.doController();
 //            tool.doAdd();
 //            tool.doEdit();
 //            tool.doView();
-//            tool.dopojo();
+            tool.dopojo();
         }
     }
 
