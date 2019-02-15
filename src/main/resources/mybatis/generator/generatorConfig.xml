@@ -3,17 +3,16 @@
         PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
+    <!-- 引入properties文件 -->
+    <properties resource="resources.properties"/>
     <!-- jar 包位置-->
-    <!-- mysql-->
-    <!--<classPathEntry location=".\.\lib/mysql-connector-java-5.1.46.jar"/>-->
-    <!-- sqlserver -->
-    <classPathEntry location=".\.\lib/sqljdbc4-4.0.jar"/>
+    <classPathEntry location="${driverlocation}"/>
+
 
     <context id="context" targetRuntime="MyBatis3" defaultModelType="flat">
 
         <!-- 自动识别数据库关键字，默认false -->
         <property name="autoDelimitKeywords" value="true"/>
-
         <!-- 生成的Java文件的编码 -->
         <property name="javaFileEncoding" value="UTF-8"/>
         <!-- 格式化java代码 -->
@@ -23,80 +22,81 @@
         <!--可以使用``包括字段名，避免字段名与sql保留字冲突报错 -->
         <property name="beginningDelimiter" value=""/>
         <property name="endingDelimiter" value=""/>
-
-        <!-- 增加爱Models Serializable实现 -->
+        <!-- 增加pojo Serializable实现 -->
         <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
 
-          <!--plugin-->
+          <!--plugin get set 方法-->
         <plugin type="com.laoxu.page.LombokPlugin"/>
         <!-- 分页插件 -->
-        <plugin type="com.laoxu.page.SelectByPagePlugin">
-        </plugin>
-
-        <!-- include the plugin -->
-        <!--<plugin type="com.mybatis.page.plugin.LombokPlugin"/>-->
-        <!--<plugin type="tk.mybatis.mapper.generator.MapperPlugin">
-            <property name="mappers" value="com.scmofit.gifm.dao.TkBaseMapper"/>
-        </plugin>-->
-        <!-- 分页插件 -->
-        <!--<plugin type="com.mybatis.page.plugin.SelectByPagePlugin"></plugin>-->
-
-
+        <plugin type="com.laoxu.page.SelectByPagePlugin"/>
 
         <!-- 此处是将Example改名为Criteria 当然 想改成什么都行 -->
         <plugin type="org.mybatis.generator.plugins.RenameExampleClassPlugin">
             <property name="searchString" value="Example$"/>
             <property name="replaceString" value="Criteria"/>
         </plugin>
-        <!--<plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"></plugin>-->
 
-        <commentGenerator>
-            <!--<property name="suppressAllComments" value="true" />-->
-            <!--关闭时间注释 -->
-            <property name="suppressDate" value="true"/>
-            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
-            <property name="suppressAllComments" value="true"/>
-        </commentGenerator>
+        <!-- 注释 -->
+        <!--<commentGenerator>-->
+            <!--<property name="suppressDate" value="true"/> &lt;!&ndash;关闭时间注释(是否生成注释代时间戳) &ndash;&gt;-->
+            <!--<property name="suppressAllComments" value="true"/>&lt;!&ndash; 是否去除自动生成的注释 true：是 ： false:否 &ndash;&gt;-->
+        <!--</commentGenerator>-->
+        <!-- 使用自定义的插件 依赖jar包 -->
+        <commentGenerator type="com.laoxu.page.MyCommentGenerator"></commentGenerator>
 
         <!-- jdbc连接信息 -->
-        <!--<jdbcConnection driverClass="${jdbc.driverClassName}"-->
-                        <!--connectionURL="${jdbc.url}"-->
-                        <!--userId="${jdbc.username}"-->
-                        <!--password="${jdbc.password}">-->
-        <!--</jdbcConnection>-->
-        <jdbcConnection driverClass="com.microsoft.sqlserver.jdbc.SQLServerDriver"
-                        connectionURL="jdbc:sqlserver://125.71.224.110:3673;databaseName=GIFM_bak"
-                        userId="sa"
-                        password="SCsme202">
+        <jdbcConnection
+                driverClass="${jdbc.driverClassName}"
+                connectionURL="${jdbc.url}"
+                userId="${jdbc.username}"
+                password="${jdbc.password}">
         </jdbcConnection>
+
+        <!-- 生成model模型，对应的包路径，以及文件存放路径(targetProject)，targetProject可以指定具体的路径,如./src/main/java，
+               也可以使用“MAVEN”来自动生成，这样生成的代码会在target/generatord-source目录下
+               targetProject : 生成的位置
+               targetPackage : 生成的包里面的位置
+               -->
         <!-- 生成对象 -->
-        <javaModelGenerator targetProject="src\main\java"
-                            targetPackage="com.scmofit.gifm.pojo">
+        <javaModelGenerator targetProject="${xml.javaPorject}"
+                            targetPackage="${xml.pojoPackage}">
             <property name="enableSubPackages" value="true"/>
         </javaModelGenerator>
-        <!-- 生成用于查询的Example对象 -->
-        <sqlMapGenerator targetProject="src\main\resources"
-                         targetPackage="mapperSecond">
+        <!--生成用于查询的Example对象-->
+        <sqlMapGenerator targetProject="${xml.xmlPorject}"
+                         targetPackage="${xml.xmlPackage}">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
         <!-- 生成DAO的类文件以及配置文件 -->
-        <javaClientGenerator targetProject="src\main\java"
-                             targetPackage="com.scmofit.gifm.dao" type="XMLMAPPER">
+        <javaClientGenerator targetProject="${xml.javaPorject}"
+                             targetPackage="${xml.daoPackage}" type="XMLMAPPER">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
+
+
         <!-- 生成表 对应的名字 -->
-        <!--<table tableName="sys_user" domainObjectName="SysUser">-->
+
+        <table tableName="sso_user" domainObjectName="SsoUser">
+            <property name="useActualColumnNames" value="true"/>
+            <generatedKey  column="id"  sqlStatement="MySql" identity="true"/>
+        </table>
+        <!--<table tableName="sys_menu" domainObjectName="SysMenu">-->
             <!--<property name="useActualColumnNames" value="true"/>-->
             <!--<generatedKey  column="id"  sqlStatement="sqlServer"   identity="true"/>-->
         <!--</table>-->
 
-        <table tableName="sys_notice" domainObjectName="SysNotice">
-            <property name="useActualColumnNames" value="true"/>
-            <generatedKey  column="id"  sqlStatement="sqlServer"  identity="true"/>
-            <columnOverride column="cst_create" property="cst_create" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler" jdbcType="OTHER" javaType="java.time.LocalDateTime" />
-            <columnOverride column="cst_modify" property="cst_modify" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler" jdbcType="OTHER" javaType="java.time.LocalDateTime" />
-        </table>
+        <!--<table tableName="sys_role_menu" domainObjectName="SysRoleMenu">-->
+            <!--<property name="useActualColumnNames" value="true"/>-->
+            <!--<generatedKey  column="id"  sqlStatement="sqlServer"   identity="true"/>-->
+        <!--</table>-->
+
+        <!--<table tableName="sys_notice" domainObjectName="SysNotice">-->
+            <!--<property name="useActualColumnNames" value="true"/>-->
+            <!--<generatedKey  column="id"  sqlStatement="sqlServer"  identity="true"/>-->
+            <!--<columnOverride column="cst_create" property="cst_create" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler" jdbcType="OTHER" javaType="java.time.LocalDateTime" />-->
+            <!--<columnOverride column="cst_modify" property="cst_modify" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler" jdbcType="OTHER" javaType="java.time.LocalDateTime" />-->
+        <!--</table>-->
 
 
         <!--<table tableName="bk_dict" domainObjectName="BkDict">-->
