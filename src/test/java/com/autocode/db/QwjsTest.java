@@ -1,6 +1,6 @@
 package com.autocode.db;
 
-import com.monkey.db.Tools;
+import tools.make.db.Tools;
 
 /**
  * Package: com.netmoon.db

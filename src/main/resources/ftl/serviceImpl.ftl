@@ -4,8 +4,8 @@ import com.yqy.midend.orgperm.common.StringFirst;
 
 import ${parentPackageName}.service.${entityName}Service;
 import ${parentPackageName}.dao.${entityName}Mapper;
-import ${parentPackageName}.entities.${entityName};
-import ${parentPackageName}.entities.${entityName}Criteria;
+import ${pojo}.${entityName};
+import ${pojo}.${entityName}Criteria;
 import com.yqy.midend.orgperm.state.FinalJson;
 import com.yqy.midend.orgperm.util.json.ExtLimit;
 import com.yqy.midend.orgperm.util.json.JsonUtil;
@@ -72,7 +72,7 @@ public class ${entityName}ServiceImpl implements ${entityName}Service {
         }
 
         int total = (int) ${entityName?uncap_first}Mapper.countByExample(criteriaObj);
-        List<${entityName}> lst = ${entityName?uncap_first}Mapper.selectPage(criteriaObj);
+        List<${entityName}> lst = ${entityName?uncap_first}Mapper.getPage(criteriaObj);
         if(total > 0){
             jsonUtil.setData(lst);
             jsonUtil.getExtlimit().setCount(total);

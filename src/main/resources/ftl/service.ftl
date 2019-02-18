@@ -1,6 +1,6 @@
 package ${parentPackageName}.service;
 
-import ${parentPackageName}.entities.${entityName};
+import ${pojo}.${entityName};
 
 import com.yqy.midend.orgperm.util.json.JsonUtil;
 
@@ -33,7 +33,7 @@ public interface ${entityName}Service {
     int removeByIDs(Set<String> ids);
 
     /**
-    * 新增业务对象
+    * 保存
     */
     public int save(${entityName} obj);
 

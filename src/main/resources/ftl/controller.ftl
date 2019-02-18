@@ -5,7 +5,7 @@ import com.scmofit.gifm.common.BeanUtils;
 import com.scmofit.gifm.common.HttpCode;
 import com.scmofit.gifm.common.JsonMapper;
 import com.scmofit.gifm.common.ServerResponse;
-import ${parentPackageName}.entities.${entityName};
+import ${pojo}.${entityName};
 import ${parentPackageName}.service.${entityName}Service;
 import com.yqy.midend.orgperm.state.FinalJson;
 import com.yqy.midend.orgperm.util.json.ExtLimit;
@@ -32,17 +32,6 @@ import java.util.Set;
 public class ${entityName}Controller {
     @Resource
     private ${entityName}Service ${entityName?uncap_first}Service;
-    @Resource
-    RestTemplate restTemplate;
-
-    /**
-    * 跳转pojoList页面
-    * @return String
-    */
-    @RequestMapping(value = "/goList", method = RequestMethod.GET)
-    public String goList() {
-        return restTemplate.getForObject("http://yiqiyun-web/index/getWeb/${entityName}.pojo", String.class);
-    }
 
 
     /**
@@ -93,34 +82,6 @@ public class ${entityName}Controller {
 
 
 
-
-    /**
-    * 跳转查看页面
-    *
-    * @param id 业务数据ID
-    * @return String
-    */
-    @RequestMapping(value = "/goView/{id}", method = RequestMethod.GET)
-    public String goView${entityName}(@PathVariable("id") String id) {
-        ${entityName} res = ${entityName?uncap_first}Service.getById(id);
-        String json = "";
-        if (res != null) {
-             json = JsonMapper.obj2String(res);
-        }
-        return restTemplate.getForObject("http://yiqiyun-web/index/getWeb/${entityName}.view/${entityName}/{json}", String.class,json);
-    }
-
-
-
-    /**
-    * 跳转新增页面
-    * @return String
-    */
-    @RequestMapping(value = "/goAdd", method = RequestMethod.GET)
-    public String goAdd${entityName}() {
-        return restTemplate.getForObject("http://yiqiyun-web/index/getWeb/${entityName}.add", String.class);
-    }
-
     /**
     * 新增一条记录
     *
@@ -144,22 +105,6 @@ public class ${entityName}Controller {
         return jsonUtil;
     }
 
-
-    /**
-    * 跳转修改页面
-    *
-    * @param id 业务数据ID
-    * @return String
-    */
-    @RequestMapping(value = "/goEdit/{id}", method = RequestMethod.GET)
-    public String goEdit${entityName}(@PathVariable("id") String id) {
-        ${entityName} res = ${entityName?uncap_first}Service.getById(id);
-        String json ="";
-        if (res != null) {
-            json = JsonMapper.obj2String(res);
-        }
-        return restTemplate.getForObject("http://yiqiyun-web/index/getWeb/${entityName}.edit/${entityName}/{json}", String.class,json);
-}
 
 
     /**
@@ -206,6 +151,7 @@ public class ${entityName}Controller {
         jsonUtil.getInfo().setMessage("删除成功");
         return jsonUtil;
     }
+
     /**
     * 批量删除记录
     *

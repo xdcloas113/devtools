@@ -1,6 +1,5 @@
 package com.autocode.db;
 
-import com.monkey.db.DbUtil;
 import junit.framework.TestCase;
 import junit.framework.TestResult;
 import org.slf4j.Logger;
