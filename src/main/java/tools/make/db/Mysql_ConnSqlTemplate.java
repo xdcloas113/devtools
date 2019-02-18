@@ -1,4 +1,4 @@
-package com.monkey.db;
+package tools.make.db;
 
 import com.alibaba.druid.sql.SQLUtils;
 

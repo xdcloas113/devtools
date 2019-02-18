@@ -1,7 +1,7 @@
-package com.monkey.db;
+package tools.make.db;
 
-import com.monkey.freemarker.GetClsNameTMM;
-import com.monkey.util.connection.ClassPathUtil;
+import tools.make.freemarker.GetClsNameTMM;
+import tools.make.util.connection.ClassPathUtil;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import org.slf4j.Logger;
@@ -22,6 +22,7 @@ public class Tools {
     private String parentPackageName = null;//"com.founder";//包名:model,sqlmap及dao的上级包名
     private String filePath = null;//"E:/tiger/tiegrWs/jwzh-syfw/web_base/src/main/java";//生成的文件目录
 //    public String filePath = "I:/MyGit/jwzh-syfw/web_base/src/main/java";//生成的文件目录
+    private String pojo; //实体的位置 再Properties 里面读取的 xml.pojoPackage=a.pojo
 
     private String pk = null;
     private String comments = null;
@@ -59,18 +60,18 @@ public class Tools {
         }
         allTemplates = new HashMap();
         try {
+            allTemplates.put("model", configuration.getTemplate("model.ftl"));
+            allTemplates.put("controller", configuration.getTemplate("controller.ftl"));
             allTemplates.put("service", configuration.getTemplate("service.ftl"));
             allTemplates.put("serviceImpl", configuration.getTemplate("serviceImpl.ftl"));
-            allTemplates.put("controller", configuration.getTemplate("controller.ftl"));
             allTemplates.put("dao", configuration.getTemplate("dao.ftl"));
-//            allTemplates.put("model", configuration.getTemplate("model.ftl"));
-//            allTemplates.put("validate", configuration.getTemplate("valid.ftl"));
             allTemplates.put("sqlmap", configuration.getTemplate("sqlmap.ftl"));
+//            allTemplates.put("validate", configuration.getTemplate("valid.ftl"));
             allTemplates.put("qwjs", configuration.getTemplate("qwjs.ftl"));
 //            allTemplates.put("add", configuration.getTemplate("add.ftl"));
 //            allTemplates.put("edit", configuration.getTemplate("edit.ftl"));
 //            allTemplates.put("view", configuration.getTemplate("view.ftl"));
-            allTemplates.put("pojo", configuration.getTemplate("pojo.ftl"));
+//            allTemplates.put("pojo", configuration.getTemplate("pojo.ftl"));
         } catch (IOException e) {
             e.printStackTrace();
             throw new RuntimeException(e);
@@ -80,6 +81,12 @@ public class Tools {
     public Tools(String parentPackageName, String filePath) {
         this.filePath = filePath;
         this.parentPackageName = parentPackageName;
+    }
+
+    public Tools(String parentPackageName, String filePath,String pojo) {
+        this.filePath = filePath;
+        this.parentPackageName = parentPackageName;
+        this.pojo = pojo;
     }
 
     public void create(String name) {
@@ -96,8 +103,9 @@ public class Tools {
         comments = DbUtil.INSTANCE.getOracleTableComments(tableName);
 
         ftlmap.put("parentPackageName",parentPackageName);
-        ftlmap.put("entityName",entityName);
-        ftlmap.put("tableName",tableName);
+        ftlmap.put("pojo",pojo);//实体位置
+        ftlmap.put("entityName",entityName);//实体名称
+        ftlmap.put("tableName",tableName);//表名
         ftlmap.put("comments",comments);
         ftlmap.put("paramName",paramName);
         ftlmap.put("pk",pk);

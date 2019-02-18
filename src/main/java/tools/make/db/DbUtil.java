@@ -1,7 +1,7 @@
-package com.monkey.db;
+package tools.make.db;
 
-import com.monkey.util.connection.ConnectionFactory;
-import com.monkey.util.connection.DbType;
+import tools.make.util.connection.ConnectionFactory;
+import tools.make.util.connection.DbType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -1,4 +1,4 @@
-package com.monkey.db;
+package tools.make.db;
 
 import freemarker.template.TemplateMethodModel;
 import freemarker.template.TemplateModelException;

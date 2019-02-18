@@ -1,13 +1,15 @@
-package com.monkey.restapi.tool;
+package tools.make.restapi.tool;
+
 
 import java.lang.annotation.*;
 
 /**
  * Created by huangjifei on 2016/10/27.
  */
-@Target(ElementType.METHOD)
+@Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface PersonalMethodDesc {
+public @interface PersonalClassDesc {
     String value() default "";
 }
+

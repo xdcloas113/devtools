@@ -1,4 +1,4 @@
-package com.monkey.freemarker;
+package tools.make.freemarker;
 
 import freemarker.template.TemplateMethodModelEx;
 import freemarker.template.TemplateModelException;
