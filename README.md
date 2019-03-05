@@ -48,5 +48,7 @@
     1.generatorConfig.xml 添加要生成的表名 ，插件地方替换MySQL或者sqlServer  29行，
     2.resources.properties 里面修改  mysql 或者 sqlserver
     记住 test/com.autocode/test/toolsTest 只能生成 controller server impl  , 插件生成 mapper ,pojo .xml
-
+    
+    记住laoxuCommin.jar要安装到本地仓库，orcale sqlserver mysql
+    mvn install:install-file -DgroupId=com.laoxu.util -DartifactId=laoxuCommon -Dversion=1.0 -Dpackaging=jar -Dfile=D:/laoxuCommon-1.0.jar
     
