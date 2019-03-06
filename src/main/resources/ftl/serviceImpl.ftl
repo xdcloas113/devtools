@@ -1,14 +1,15 @@
 package ${parentPackageName}.service.impl;
 
-import com.yqy.midend.orgperm.common.StringFirst;
-
 import ${parentPackageName}.service.${entityName}Service;
 import ${parentPackageName}.dao.${entityName}Mapper;
 import ${pojo}.${entityName};
 import ${pojo}.${entityName}Criteria;
-import com.yqy.midend.orgperm.state.FinalJson;
-import com.yqy.midend.orgperm.util.json.ExtLimit;
-import com.yqy.midend.orgperm.util.json.JsonUtil;
+
+import com.laoxu.utils.json.ExtLimit;
+import com.laoxu.utils.json.JsonUtil;
+import com.laoxu.utils.status.FinalJson;
+import com.laoxu.tools.StringFirst;
+
 import lombok.extern.apachecommons.CommonsLog;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +17,6 @@ import javax.annotation.Resource;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -31,8 +31,10 @@ import java.util.Set;
 @Service
 //@Transactional
 public class ${entityName}ServiceImpl implements ${entityName}Service {
+
     @Resource
     private ${entityName}Mapper ${entityName?uncap_first}Mapper;
+
     @Override
     public JsonUtil selectPage(int page, int rows, Map<String, Object> map,JsonUtil jsonUtil) {
         <#--Map<String, Object> map = (Map<String, Object>) BeanUtils.toMap(infoQuery);-->
@@ -92,7 +94,7 @@ public class ${entityName}ServiceImpl implements ${entityName}Service {
         return ${entityName?uncap_first}Mapper.deleteByPrimaryKey(id);
         <#else>
         //int id = obj.getId(); //非字符串的,自增或其他方式
-        return ${entityName?uncap_first}Mapper.deleteByPrimaryKey(Integer.parseInt(id.trim()));
+        return ${entityName?uncap_first}Mapper.deleteByPrimaryKey(id);
         </#if>
     }
 
@@ -126,7 +128,7 @@ public class ${entityName}ServiceImpl implements ${entityName}Service {
         return ${entityName?uncap_first}Mapper.selectByPrimaryKey(id);
     <#else>
         //int id = obj.getId(); //非字符串的//TODO:需要确认
-        return ${entityName?uncap_first}Mapper.selectByPrimaryKey(Integer.parseInt(id.trim()));
+        return ${entityName?uncap_first}Mapper.selectByPrimaryKey(id);
     </#if>
     }
 

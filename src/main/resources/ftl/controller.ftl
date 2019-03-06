@@ -1,24 +1,23 @@
 package ${parentPackageName}.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.scmofit.gifm.common.BeanUtils;
-import com.scmofit.gifm.common.HttpCode;
-import com.scmofit.gifm.common.JsonMapper;
-import com.scmofit.gifm.common.ServerResponse;
 import ${pojo}.${entityName};
 import ${parentPackageName}.service.${entityName}Service;
-import com.yqy.midend.orgperm.state.FinalJson;
-import com.yqy.midend.orgperm.util.json.ExtLimit;
-import com.yqy.midend.orgperm.util.json.JsonUtil;
 import lombok.extern.apachecommons.CommonsLog;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.beanutils.BeanUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
+
 
 import javax.annotation.Resource;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+
+import com.laoxu.utils.json.ExtLimit;
+import com.laoxu.utils.json.JsonUtil;
+import com.laoxu.utils.status.FinalJson;
+
 
 /**
 * @program: gifm-sub
@@ -28,8 +27,9 @@ import java.util.Set;
 **/
 @CommonsLog
 @RestController
-@RequestMapping("/v1/${entityName?uncap_first}")
+@RequestMapping("/${entityName?uncap_first}")
 public class ${entityName}Controller {
+
     @Resource
     private ${entityName}Service ${entityName?uncap_first}Service;
 
@@ -89,7 +89,7 @@ public class ${entityName}Controller {
     * @return JsonUtil
     */
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public JsonUtil save${entityName}(@RequestBody JsonUtil jsonUtil) {
+    public JsonUtil save${entityName}(@RequestBody JsonUtil jsonUtil) throws Exception {
         JsonUtil jUBean = JSON.parseObject(JSON.toJSONString(jsonUtil),JsonUtil.class);
         Map<String,Object> beanmap = (Map)jUBean.getData();
         ${entityName} ${entityName?uncap_first} = new ${entityName}();
@@ -114,7 +114,7 @@ public class ${entityName}Controller {
     * @return JsonUtil
     */
     @RequestMapping(method = RequestMethod.PUT)
-    public JsonUtil update${entityName}(@RequestBody JsonUtil jsonUtil) {
+    public JsonUtil update${entityName}(@RequestBody JsonUtil jsonUtil) throws Exception{
         JsonUtil jUBean = JSON.parseObject(JSON.toJSONString(jsonUtil),JsonUtil.class);
         Map<String,Object> beanmap = (Map)jUBean.getData();
         ${entityName} ${entityName?uncap_first} = new ${entityName}();
@@ -155,20 +155,22 @@ public class ${entityName}Controller {
     /**
     * 批量删除记录
     *
-    * @param ids 业务数据ID
+    * @param jsonUtil
     * @return ServerResponse
     */
-    @RequestMapping(value = "/${entityName?uncap_first}s/{ids}", method = RequestMethod.DELETE)
-    public ServerResponse delete${entityName}s(@PathVariable("ids") String ids) {
+    @RequestMapping(value = "/${entityName?uncap_first}s", method = RequestMethod.DELETE)
+    public JsonUtil delete${entityName}s(@RequestBody JsonUtil jsonUtil) {
+        JsonUtil jUBean = JSON.parseObject(JSON.toJSONString(jsonUtil),JsonUtil.class);
+        Map<String,Object> beanmap = (Map)jUBean.getData();
+        String ids = beanmap.get("ids").toString();
         String[] strings = StringUtils.split(ids, ",");
         Set <String> deleteIdList = new HashSet<>();
         for (int i = 0; i < strings.length; i++) {
             deleteIdList.add(strings[i]);
         }
         int res = ${entityName?uncap_first}Service.removeByIDs(deleteIdList);//TODO:该方法对应的sql暂时需要手工书写
-        if (res != 1) {
-            return new ServerResponse(HttpCode.error,"删除失败！","删除失败！");
-        }
-        return  new ServerResponse(HttpCode.success,"删除成功","删除成功");
+        jsonUtil.getInfo().setMessage( res > 0 ? "删除成功" : "删除失败");
+        jsonUtil.getInfo().setStatus( res > 0 ? FinalJson.STATUS_OK : FinalJson.STATUS_NOTACCEPTABLE);
+        return jsonUtil;
     }
 }

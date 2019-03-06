@@ -1,8 +1,7 @@
 package ${parentPackageName}.service;
 
 import ${pojo}.${entityName};
-
-import com.yqy.midend.orgperm.util.json.JsonUtil;
+import com.laoxu.utils.json.JsonUtil;
 
 import java.util.List;
 import java.util.Map;

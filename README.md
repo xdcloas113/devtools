@@ -51,4 +51,5 @@
     
     记住laoxuCommin.jar要安装到本地仓库，orcale sqlserver mysql
     mvn install:install-file -DgroupId=com.laoxu.util -DartifactId=laoxuCommon -Dversion=1.0 -Dpackaging=jar -Dfile=D:/laoxuCommon-1.0.jar
-    
+    mvn install:install-file -DgroupId=com.oracle -DartifactId=ojdbc5 -Dversion=11.2.0.1.0 -Dpackaging=jar -Dfile=%ORACLE_HOME%/jdbc/lib/ojdbc5.jar
+    mvn install:install-file -DgroupId=com.oracle -DartifactId=ojdbc6 -Dversion=11.2.0.1.0 -Dpackaging=jar -Dfile=%ORACLE_HOME%/jdbc/lib/ojdbc6.jar

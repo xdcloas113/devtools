@@ -74,254 +74,28 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-
-
         <!-- 生成表 对应的名字 -->
+        <!-- mysql-->
+        <!--<table tableName="sso_user" domainObjectName="SsoUser">-->
+            <!--<property name="useActualColumnNames" value="true"/>-->
+            <!--<generatedKey  column="id"  sqlStatement="MySql" identity="true"/>-->
+        <!--</table>-->
 
-        <table tableName="sso_user" domainObjectName="SsoUser">
-            <property name="useActualColumnNames" value="true"/>
-            <generatedKey  column="id"  sqlStatement="MySql" identity="true"/>
-        </table>
+        <!-- sqlServer-->
         <!--<table tableName="sys_menu" domainObjectName="SysMenu">-->
             <!--<property name="useActualColumnNames" value="true"/>-->
             <!--<generatedKey  column="id"  sqlStatement="sqlServer"   identity="true"/>-->
         <!--</table>-->
 
-        <!--<table tableName="sys_role_menu" domainObjectName="SysRoleMenu">-->
-            <!--<property name="useActualColumnNames" value="true"/>-->
-            <!--<generatedKey  column="id"  sqlStatement="sqlServer"   identity="true"/>-->
-        <!--</table>-->
-
-        <!--<table tableName="sys_notice" domainObjectName="SysNotice">-->
-            <!--<property name="useActualColumnNames" value="true"/>-->
-            <!--<generatedKey  column="id"  sqlStatement="sqlServer"  identity="true"/>-->
-            <!--<columnOverride column="cst_create" property="cst_create" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler" jdbcType="OTHER" javaType="java.time.LocalDateTime" />-->
-            <!--<columnOverride column="cst_modify" property="cst_modify" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler" jdbcType="OTHER" javaType="java.time.LocalDateTime" />-->
-        <!--</table>-->
-
-
-        <!--<table tableName="bk_dict" domainObjectName="BkDict">-->
-            <!--<property name="useActualColumnNames" value="true"/>-->
-            <!--<generatedKey  column="id"  sqlStatement="MySql" identity="true"/>-->
-        <!--</table>-->
-
-        <!--<table tableName="bk_dict_mgmt" domainObjectName="BkDictMgmt">-->
-        <!--<property name="useActualColumnNames" value="true"/>-->
-        <!--<generatedKey  column="id"  sqlStatement="MySql" identity="true"/>-->
-        <!--</table>-->
-
-        <!--<table tableName="bk_file" domainObjectName="BkFile">-->
-        <!--<property name="useActualColumnNames" value="true"/>-->
-        <!--<generatedKey  column="id"  sqlStatement="MySql" identity="true"/>-->
-        <!--</table>-->
-
-        <!--<table tableName="bk_menu" domainObjectName="BkMenu">-->
-        <!--<property name="useActualColumnNames" value="true"/>-->
-        <!--<generatedKey  column="id"  sqlStatement="MySql" identity="true"/>-->
-        <!--</table>-->
-
-        <!--<table tableName="bk_operate" domainObjectName="BkOperate">-->
-        <!--<property name="useActualColumnNames" value="true"/>-->
-        <!--<generatedKey  column="id"  sqlStatement="MySql" identity="true"/>-->
-        <!--</table>-->
-
-        <!--<table tableName="bk_org" domainObjectName="BkOrg">-->
-        <!--<property name="useActualColumnNames" value="true"/>-->
-        <!--<generatedKey  column="id"  sqlStatement="MySql" identity="true"/>-->
-        <!--</table>-->
-
-        <!--<table tableName="bk_org_role" domainObjectName="BkOrgRole">-->
-        <!--<property name="useActualColumnNames" value="true"/>-->
-        <!--<generatedKey  column="id"  sqlStatement="MySql" identity="true"/>-->
-        <!--</table>-->
-
-        <!--<table tableName="bk_page_item" domainObjectName="BkPageItem">-->
-        <!--<property name="useActualColumnNames" value="true"/>-->
-        <!--<generatedKey  column="id"  sqlStatement="MySql" identity="true"/>-->
-        <!--</table>-->
-
-        <!--<table tableName="bk_perm_file" domainObjectName="BkPermFile">-->
-        <!--<property name="useActualColumnNames" value="true"/>-->
-        <!--<generatedKey  column="id"  sqlStatement="MySql" identity="true"/>-->
-        <!--</table>-->
-
-        <!--<table tableName="bk_perm_menu" domainObjectName="BkPermMenu">-->
-        <!--<property name="useActualColumnNames" value="true"/>-->
-        <!--<generatedKey  column="id"  sqlStatement="MySql" identity="true"/>-->
-        <!--</table>-->
-
-        <!--<table tableName="bk_perm_sysfunction" domainObjectName="BkPermSysfunction">-->
-        <!--<property name="useActualColumnNames" value="true"/>-->
-        <!--<generatedKey  column="id"  sqlStatement="MySql" identity="true"/>-->
-        <!--</table>-->
-
-        <!--<table tableName="bk_perm_oper" domainObjectName="BkPermOper">-->
-        <!--<property name="useActualColumnNames" value="true"/>-->
-        <!--<generatedKey  column="id"  sqlStatement="MySql" identity="true"/>-->
-        <!--</table>-->
-
-        <!--<table tableName="bk_perm_page" domainObjectName="BkPermPage">-->
-        <!--<property name="useActualColumnNames" value="true"/>-->
-        <!--<generatedKey  column="id"  sqlStatement="MySql" identity="true"/>-->
-        <!--</table>-->
-
-        <!--<table tableName="bk_privelege" domainObjectName="BkPrivelege">-->
-        <!--<property name="useActualColumnNames" value="true"/>-->
-        <!--<generatedKey  column="id"  sqlStatement="MySql" identity="true"/>-->
-        <!--</table>-->
-
-        <!--<table tableName="bk_role" domainObjectName="BkRole">-->
-            <!--<property name="useActualColumnNames" value="true"/>-->
-            <!--<generatedKey  column="id"  sqlStatement="MySql" identity="true"/>-->
-        <!--</table>-->
-
-        <!--<table tableName="bk_role_resource" domainObjectName="BkRoleResource">-->
-        <!--<property name="useActualColumnNames" value="true"/>-->
-        <!--<generatedKey  column="id"  sqlStatement="MySql" identity="true"/>-->
-        <!--</table>-->
-
-        <!--<table tableName="bk_sub_system" domainObjectName="BkSubSystem">-->
-        <!--<property name="useActualColumnNames" value="true"/>-->
-        <!--<generatedKey  column="id"  sqlStatement="MySql" identity="true"/>-->
-        <!--</table>-->
-
-        <!--<table tableName="bk_sys_settings" domainObjectName="BkSysSettings">-->
-        <!--<property name="useActualColumnNames" value="true"/>-->
-        <!--<generatedKey  column="id"  sqlStatement="MySql" identity="true"/>-->
-        <!--</table>-->
-
-        <!--<table tableName="bk_tenant" domainObjectName="BkTenant">-->
-            <!--<property name="useActualColumnNames" value="true"/>-->
-            <!--<generatedKey  column="id"  sqlStatement="MySql" identity="true"/>-->
-        <!--</table>-->
-
-        <!--<table tableName="bk_user_device" domainObjectName="BkUserDevice">-->
-        <!--<property name="useActualColumnNames" value="true"/>-->
-        <!--<generatedKey  column="id"  sqlStatement="MySql" identity="true"/>-->
-        <!--</table>-->
-
-        <!--<table tableName="bk_user_info" domainObjectName="BkUserInfo">-->
-        <!--<property name="useActualColumnNames" value="true"/>-->
-        <!--<generatedKey  column="id"  sqlStatement="MySql" identity="true"/>-->
-        <!--</table>-->
-
-        <!--<table tableName="bk_user_org" domainObjectName="BkUserOrg">-->
-        <!--<property name="useActualColumnNames" value="true"/>-->
-        <!--<generatedKey  column="id"  sqlStatement="MySql" identity="true"/>-->
-        <!--</table>-->
-
-        <!--<table tableName="bk_user_recom" domainObjectName="BkUserRecom">-->
-        <!--<property name="useActualColumnNames" value="true"/>-->
-        <!--<generatedKey  column="id"  sqlStatement="MySql" identity="true"/>-->
-        <!--</table>-->
-
-        <!--<table tableName="bk_usr_role" domainObjectName="BkUsrRole">-->
-        <!--<property name="useActualColumnNames" value="true"/>-->
-        <!--<generatedKey  column="id"  sqlStatement="MySql" identity="true"/>-->
-        <!--</table>-->
-
-        <!--<table tableName="cm_order" domainObjectName="CmOrder">-->
-            <!--<property name="useActualColumnNames" value="true"/>-->
-            <!--<generatedKey  column="id"  sqlStatement="MySql" identity="true"/>-->
-        <!--</table>-->
-
-
-        <!--<table tableName="cm_partner" domainObjectName="CmPartner">-->
-        <!--<property name="useActualColumnNames" value="true"/>-->
-        <!--<generatedKey  column="id"  sqlStatement="MySql" identity="true"/>-->
-        <!--</table>-->
-
-        <!--<table tableName="cr_device" domainObjectName="CrDevice">-->
-            <!--<property name="useActualColumnNames" value="true"/>-->
-            <!--<generatedKey  column="id"  sqlStatement="MySql" identity="true"/>-->
-        <!--</table>-->
-
-
-        <!--<table tableName="cr_device_data" domainObjectName="CrDeviceData">-->
-            <!--<property name="useActualColumnNames" value="true"/>-->
-            <!--<generatedKey  column="id"  sqlStatement="MySql" identity="true"/>-->
-        <!--</table>-->
-
-        <!--<table tableName="dev_base" domainObjectName="DevBase">-->
-            <!--<property name="useActualColumnNames" value="true"/>-->
-            <!--<generatedKey  column="id"  sqlStatement="MySql" identity="true"/>-->
-        <!--</table>-->
-
-        <!--<table tableName="dev_compressor" domainObjectName="DevCompressor">-->
-        <!--<property name="useActualColumnNames" value="true"/>-->
-        <!--<generatedKey  column="id"  sqlStatement="MySql" identity="true"/>-->
-        <!--</table>-->
-
-        <!--<table tableName="dev_lathe" domainObjectName="DevLathe">-->
-        <!--<property name="useActualColumnNames" value="true"/>-->
-        <!--<generatedKey  column="id"  sqlStatement="MySql" identity="true"/>-->
-        <!--</table>-->
-
-        <!--<table tableName="dev_robot" domainObjectName="DevRobot">-->
-        <!--<property name="useActualColumnNames" value="true"/>-->
-        <!--<generatedKey  column="id"  sqlStatement="MySql" identity="true"/>-->
-        <!--</table>-->
-
-        <!--<table tableName="sso_audit" domainObjectName="SsoAudit">-->
-        <!--<property name="useActualColumnNames" value="true"/>-->
-        <!--<generatedKey  column="id"  sqlStatement="MySql" identity="true"/>-->
-        <!--</table>-->
-
-        <!--<table tableName="sso_audit_log" domainObjectName="SsoAuditLog">-->
-        <!--<property name="useActualColumnNames" value="true"/>-->
-        <!--<generatedKey  column="id"  sqlStatement="MySql" identity="true"/>-->
-        <!--</table>-->
-
-        <!--<table tableName="sso_phone" domainObjectName="SsoPhone">-->
-        <!--<property name="useActualColumnNames" value="true"/>-->
-        <!--<generatedKey  column="id"  sqlStatement="MySql" identity="true"/>-->
-        <!--</table>-->
-
-        <!--<table tableName="sso_platform" domainObjectName="SsoPlatform">-->
-        <!--<property name="useActualColumnNames" value="true"/>-->
-        <!--<generatedKey  column="id"  sqlStatement="MySql" identity="true"/>-->
-        <!--</table>-->
-
-        <!--<table tableName="sso_security" domainObjectName="SsoSecurity">-->
-        <!--<property name="useActualColumnNames" value="true"/>-->
-        <!--<generatedKey  column="id"  sqlStatement="MySql" identity="true"/>-->
-        <!--</table>-->
-
-        <!--<table tableName="sso_trace" domainObjectName="SsoTrace">-->
-            <!--<property name="useActualColumnNames" value="true"/>-->
-            <!--<generatedKey  column="id"  sqlStatement="MySql" identity="true"/>-->
-        <!--</table>-->
-
-        <!--<table tableName="sso_user" domainObjectName="SsoUser">-->
-        <!--<property name="useActualColumnNames" value="true"/>-->
-        <!--<generatedKey  column="id"  sqlStatement="MySql" identity="true"/>-->
-        <!--</table>-->
-
-        <!--<table tableName="sso_user_email" domainObjectName="SsoUserEmail">-->
-        <!--<property name="useActualColumnNames" value="true"/>-->
-        <!--<generatedKey  column="id"  sqlStatement="MySql" identity="true"/>-->
-        <!--</table>-->
-
-        <!--<table tableName="sys_annex" domainObjectName="SysAnnex">-->
-            <!--<property name="useActualColumnNames" value="true"/>-->
-            <!--<generatedKey  column="id"  sqlStatement="MySql" identity="true"/>-->
-        <!--</table>-->
-
-        <!--<table tableName="sys_annex_type" domainObjectName="SysAnnexType">-->
-            <!--<property name="useActualColumnNames" value="true"/>-->
-            <!--<generatedKey  column="id"  sqlStatement="MySql" identity="true"/>-->
-        <!--</table>-->
-
-        <!--<table tableName="bk_employee" domainObjectName="BkEmployee">-->
-        <!--<property name="useActualColumnNames" value="true"/>-->
-        <!--<generatedKey  column="id"  sqlStatement="MySql" identity="true"/>-->
-        <!--</table>-->
-
-        <!--<table tableName="bk_employee_org" domainObjectName="BkEmployeeOrg">-->
-        <!--<property name="useActualColumnNames" value="true"/>-->
-        <!--<generatedKey  column="id"  sqlStatement="MySql" identity="true"/>-->
-        <!--</table>-->
-
+        <!-- oracle -->
+        <table tableName="BDA_ZBJJ_T_S_QYSJ" domainObjectName="BdaZbjjTSQysj">
+            <property name="useActualColumnNames" value="true"/>
+            <generatedKey  column="id"  sqlStatement="Oracle"   identity="true"/>
+         </table>
+        <table tableName="BDA_ZBJJ_T_S_LYSJ" domainObjectName="BdaZbjjTSLysj">
+            <property name="useActualColumnNames" value="true"/>
+            <generatedKey  column="id"  sqlStatement="Oracle"   identity="true"/>
+        </table>
 
     </context>
 </generatorConfiguration>

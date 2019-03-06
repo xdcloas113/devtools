@@ -33,17 +33,8 @@ public class ToolsTest {
 
         //需要生成的表名
         String[] tablenames = {
-                "sso_user",
-//                "bk_file","bk_page_item"
-//                "bk_employee","bk_employee_org"
-//                "cr_device_data","cm_order","dev_base","sso_trace","sys_annex","sys_annex_type",
-//                "cr_device","bk_tenant","bk_role",
-//        		"bk_dict","bk_dict_mgmt","bk_menu","bk_operate","bk_org"
-//                ,"bk_org_role","bk_perm_file","bk_perm_menu","bk_perm_oper","bk_perm_sysfunction"
-//                ,"bk_perm_page","bk_privelege","bk_role_resource","bk_sub_system","bk_sys_settings"
-//                ,"bk_user_device","bk_user_info","bk_user_org","bk_user_recom","bk_usr_role","cm_partner"
-//                ,"dev_compressor","dev_lathe","dev_robot","sso_audit","sso_audit_log","sso_phone",
-//                "sso_platform","sso_security","sso_user","sso_user_email"
+                "BDA_ZBJJ_T_S_QYSJ",
+                "BDA_ZBJJ_T_S_LYSJ",
         };
         Arrays.stream(tablenames).forEach(s -> {
             tool.create(s);
