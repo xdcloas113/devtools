@@ -5,10 +5,12 @@ import ${parentPackageName}.dao.${entityName}Mapper;
 import ${pojo}.${entityName};
 import ${pojo}.${entityName}Criteria;
 
+import com.alibaba.fastjson.JSON;
 import com.laoxu.utils.json.ExtLimit;
 import com.laoxu.utils.json.JsonUtil;
 import com.laoxu.utils.status.FinalJson;
 import com.laoxu.tools.StringFirst;
+import com.laoxu.utils.json.Info;
 
 import lombok.extern.apachecommons.CommonsLog;
 import org.springframework.stereotype.Service;
@@ -38,10 +40,7 @@ public class ${entityName}ServiceImpl implements ${entityName}Service {
     @Override
     public JsonUtil selectPage(int page, int rows, Map<String, Object> map,JsonUtil jsonUtil) {
         <#--Map<String, Object> map = (Map<String, Object>) BeanUtils.toMap(infoQuery);-->
-
         <#--int pageSize = (page - 1) * rows;-->
-        //Subject currentUser = SecurityUtils.getSubject();
-        //SysUser user = (SysUser) currentUser.getPrincipal();
         ${entityName}Criteria criteriaObj = new ${entityName}Criteria();
         ${entityName}Criteria.Criteria criteria= criteriaObj.createCriteria();
         map.forEach((k,v)->{
@@ -75,11 +74,15 @@ public class ${entityName}ServiceImpl implements ${entityName}Service {
 
         int total = (int) ${entityName?uncap_first}Mapper.countByExample(criteriaObj);
         List<${entityName}> lst = ${entityName?uncap_first}Mapper.getPage(criteriaObj);
+        Info info = new Info();
+        ExtLimit extLimit = new ExtLimit();
         if(total > 0){
             jsonUtil.setData(lst);
-            jsonUtil.getExtlimit().setCount(total);
-            jsonUtil.getInfo().setStatus(FinalJson.STATUS_OK);
-            jsonUtil.getInfo().setMessage("请求成功");
+            extLimit.setCount(total);
+            info.setStatus(FinalJson.STATUS_OK);
+            info.setMessage("请求成功");
+            jsonUtil.setExtlimit(extLimit);
+            jsonUtil.setInfo(info);
         }else {
             jsonUtil.getInfo().setStatus(FinalJson.STATUS_NOTACCEPTABLE);
             jsonUtil.getInfo().setMessage("请求失败");
@@ -132,8 +135,22 @@ public class ${entityName}ServiceImpl implements ${entityName}Service {
     </#if>
     }
 
+    //暂时没写需要自己条件controlle
     @Override
-    public List<${entityName}> getMany() {
-        return ${entityName?uncap_first}Mapper.selectByExample(new ${entityName}Criteria());
+    public JsonUtil getMany(JsonUtil jsonUtil) {
+        JsonUtil jUBean = JSON.parseObject(JSON.toJSONString(jsonUtil),JsonUtil.class);
+        Map<String,Object> beanmap = (Map) jUBean.getData();
+        Info info = new Info();
+        if(beanmap == null){
+            info.setStatus(FinalJson.STATUS_NOTACCEPTABLE);
+            info.setMessage("请求失败");
+            jsonUtil.setInfo(info);
+            return jsonUtil;
+        }
+        List<${entityName}>  ${entityName?uncap_first} = ${entityName?uncap_first}Mapper.selectByExample(new ${entityName}Criteria());
+        jsonUtil.setData (${entityName?uncap_first}!= null && !${entityName?uncap_first}.isEmpty() ? ${entityName?uncap_first} : "");
+        info.setMessage(${entityName?uncap_first}!= null && !${entityName?uncap_first}.isEmpty() ? "请求成功" : "请求失败");
+        info.setStatus(${entityName?uncap_first}!= null && !${entityName?uncap_first}.isEmpty() ? FinalJson.STATUS_OK : FinalJson.STATUS_NOTACCEPTABLE );
+        return jsonUtil;
     }
 }

@@ -35,6 +35,7 @@ public class ToolsTest {
         String[] tablenames = {
                 "BDA_ZBJJ_T_S_QYSJ",
                 "BDA_ZBJJ_T_S_LYSJ",
+//                "sso_user",
         };
         Arrays.stream(tablenames).forEach(s -> {
             tool.create(s);

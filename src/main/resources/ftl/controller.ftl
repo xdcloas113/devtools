@@ -14,6 +14,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import com.laoxu.utils.json.Info;
 import com.laoxu.utils.json.ExtLimit;
 import com.laoxu.utils.json.JsonUtil;
 import com.laoxu.utils.status.FinalJson;
@@ -45,8 +46,10 @@ public class ${entityName}Controller {
         JsonUtil jUBean = JSON.parseObject(JSON.toJSONString(jsonUtil),JsonUtil.class);
         Map<String,Object> beanmap = (Map) jUBean.getData();
         if(beanmap == null){
-            jsonUtil.getInfo().setStatus(FinalJson.STATUS_NOTACCEPTABLE);
-            jsonUtil.getInfo().setMessage("请求失败");
+            Info info = new Info();
+            info.setStatus(FinalJson.STATUS_NOTACCEPTABLE);
+            info.setMessage("请求失败");
+            jsonUtil.setInfo(info);
             return jsonUtil;
         }
         ExtLimit extLimit = jUBean.getExtlimit();
@@ -69,13 +72,16 @@ public class ${entityName}Controller {
         JsonUtil jUBean = JSON.parseObject(JSON.toJSONString(jsonUtil),JsonUtil.class);
         Map<String,Object> beanmap = (Map)jUBean.getData();
         ${entityName} ${entityName?uncap_first} = ${entityName?uncap_first}Service.getById(beanmap.get("id").toString());
+        Info info = new Info();
         if(beanmap == null || ${entityName?uncap_first} == null){
-            jsonUtil.getInfo().setStatus(FinalJson.STATUS_NOTACCEPTABLE);
-            jsonUtil.getInfo().setMessage("请求失败");
+            info.setStatus(FinalJson.STATUS_NOTACCEPTABLE);
+            info.setMessage("请求失败");
+            jsonUtil.setInfo(info);
             return jsonUtil;
         }
-        jsonUtil.getInfo().setStatus(FinalJson.STATUS_OK);
-        jsonUtil.getInfo().setMessage("请求成功");
+        info.setStatus(FinalJson.STATUS_OK);
+        info.setMessage("请求成功");
+        jsonUtil.setInfo(info);
         jsonUtil.setData(${entityName?uncap_first});
         return jsonUtil;
     }
@@ -120,13 +126,10 @@ public class ${entityName}Controller {
         ${entityName} ${entityName?uncap_first} = new ${entityName}();
         BeanUtils.copyProperties(beanmap,${entityName?uncap_first});
         int res = ${entityName?uncap_first}Service.updateByID(${entityName?uncap_first});
-        if (res != 1) {
-            jsonUtil.getInfo().setStatus(FinalJson.STATUS_NOTACCEPTABLE);
-            jsonUtil.getInfo().setMessage("更新失败");
-            return jsonUtil;
-        }
-        jsonUtil.getInfo().setStatus(FinalJson.STATUS_OK);
-        jsonUtil.getInfo().setMessage("更新成功");
+        Info info = new Info();
+        info.setStatus(res > 0 ?  FinalJson.STATUS_OK : FinalJson.STATUS_NOTACCEPTABLE);
+        info.setMessage(res > 0 ? "更新失败" : "更新失败");
+        jsonUtil.setInfo(info);
         return jsonUtil;
     }
 
@@ -142,13 +145,10 @@ public class ${entityName}Controller {
         JsonUtil jUBean = JSON.parseObject(JSON.toJSONString(jsonUtil),JsonUtil.class);
         Map<String,Object> beanmap = (Map)jUBean.getData();
         int res = ${entityName?uncap_first}Service.removeByID(beanmap.get("id").toString());
-        if (res != 1) {
-            jsonUtil.getInfo().setStatus(FinalJson.STATUS_NOTACCEPTABLE);
-            jsonUtil.getInfo().setMessage("删除失败");
-            return jsonUtil;
-        }
-        jsonUtil.getInfo().setStatus(FinalJson.STATUS_OK);
-        jsonUtil.getInfo().setMessage("删除成功");
+        Info info = new Info();
+        info.setStatus(res > 0 ?  FinalJson.STATUS_OK : FinalJson.STATUS_NOTACCEPTABLE);
+        info.setMessage(res > 0 ? "删除成功" : "删除失败");
+        jsonUtil.setInfo(info);
         return jsonUtil;
     }
 

@@ -47,7 +47,7 @@ public interface ${entityName}Service {
     /**
     * 根据业务实体查询业务实体列表
     */
-    public List<${entityName}> getMany() ;
+    public JsonUtil getMany(JsonUtil jsonUtil) ;
 
 }
 

@@ -205,6 +205,13 @@
         <version>${lombok.ver}</version>
         <scope>provided</scope>
     </dependency>
+
+    <dependency>
+        <groupId>org.mybatis</groupId>
+        <artifactId>mybatis</artifactId>
+        <version>3.5.0</version>
+    </dependency>
+
     <dependency>
         <groupId>org.mybatis.generator</groupId>
         <artifactId>mybatis-generator-maven-plugin</artifactId>

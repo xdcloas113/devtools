@@ -75,7 +75,7 @@
         </javaClientGenerator>
 
         <!-- 生成表 对应的名字 -->
-        <!-- mysql-->
+         <!--mysql-->
         <!--<table tableName="sso_user" domainObjectName="SsoUser">-->
             <!--<property name="useActualColumnNames" value="true"/>-->
             <!--<generatedKey  column="id"  sqlStatement="MySql" identity="true"/>-->
