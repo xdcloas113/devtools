@@ -39,8 +39,6 @@ public class ${entityName}ServiceImpl implements ${entityName}Service {
 
     @Override
     public JsonUtil selectPage(int page, int rows, Map<String, Object> map,JsonUtil jsonUtil) {
-        <#--Map<String, Object> map = (Map<String, Object>) BeanUtils.toMap(infoQuery);-->
-        <#--int pageSize = (page - 1) * rows;-->
         ${entityName}Criteria criteriaObj = new ${entityName}Criteria();
         ${entityName}Criteria.Criteria criteria= criteriaObj.createCriteria();
         map.forEach((k,v)->{
@@ -49,10 +47,10 @@ public class ${entityName}ServiceImpl implements ${entityName}Service {
             Class<?> type = pd.getType();
             Method beanMethod ;
             if(type == String.class){
-                beanMethod = criteria.getClass().getMethod("and"+ StringFirst.firstCharUp(k)+"Like",type);
+                beanMethod = criteria.getClass().getMethod("and"+ k+"Like",type);
                 beanMethod.invoke(criteria,"%"+v+"%");
             }else{
-                beanMethod = criteria.getClass().getMethod("and"+ StringFirst.firstCharUp(k)+"EqualTo",type);
+                beanMethod = criteria.getClass().getMethod("and"+ k+"EqualTo",type);
                 beanMethod.invoke(criteria,v);
             }
         } catch (NoSuchFieldException e) {
@@ -69,7 +67,7 @@ public class ${entityName}ServiceImpl implements ${entityName}Service {
         criteriaObj.setPageSize(rows);
         ExtLimit e = jsonUtil.getExtlimit();
         if(!e.getSort().equals("string")){
-            criteriaObj.setOrderByClause(e.getSort()+"  "+e.getDir());
+            criteriaObj.setOrderByClause(e.getDir()+"   "+e.getSort());
         }
 
         int total = (int) ${entityName?uncap_first}Mapper.countByExample(criteriaObj);

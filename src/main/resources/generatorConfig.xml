@@ -27,8 +27,9 @@
           <!--plugin get set 方法-->
         <plugin type="com.laoxu.tools.LombokPlugin"/>
         <!-- 分页插件 -->
-        <plugin type="com.laoxu.tools.MYSQLSelectByPagePlugin"/>
+        <!--<plugin type="com.laoxu.tools.MYSQLSelectByPagePlugin"/>-->
         <!--<plugin type="com.laoxu.tools.SqlServerSelectByPagePlugin"/>-->
+        <plugin type="com.laoxu.tools.OracleSelectByPagePlugin"/>
 
         <!-- 此处是将Example改名为Criteria 当然 想改成什么都行 -->
         <plugin type="org.mybatis.generator.plugins.RenameExampleClassPlugin">
@@ -88,14 +89,18 @@
         <!--</table>-->
 
         <!-- oracle -->
-        <table tableName="BDA_ZBJJ_T_S_QYSJ" domainObjectName="BdaZbjjTSQysj">
+        <table tableName="BDA_QY_T_O_ZXQYJSMD" domainObjectName="BdaQyTOZxqyjsmd">
             <property name="useActualColumnNames" value="true"/>
-            <generatedKey  column="id"  sqlStatement="Oracle"   identity="true"/>
+            <generatedKey  column="GUID"  sqlStatement="Oracle"   identity="true"/>
          </table>
-        <table tableName="BDA_ZBJJ_T_S_LYSJ" domainObjectName="BdaZbjjTSLysj">
-            <property name="useActualColumnNames" value="true"/>
-            <generatedKey  column="id"  sqlStatement="Oracle"   identity="true"/>
-        </table>
+        <!--<table tableName="BDA_QY_T_O_ZXQYCZMD" domainObjectName="BdaQyTOZxqyczmd">-->
+            <!--<property name="useActualColumnNames" value="true"/>-->
+            <!--<generatedKey  column="GUID"  sqlStatement="Oracle"   identity="true"/>-->
+         <!--</table>-->
+        <!--<table tableName="BDA_ZBJJ_T_S_LYSJ" domainObjectName="BdaZbjjTSLysj">-->
+            <!--<property name="useActualColumnNames" value="true"/>-->
+            <!--<generatedKey  column="id"  sqlStatement="Oracle"   identity="true"/>-->
+        <!--</table>-->
 
     </context>
 </generatorConfiguration>
