@@ -27,9 +27,9 @@
           <!--plugin get set 方法-->
         <plugin type="com.laoxu.tools.LombokPlugin"/>
         <!-- 分页插件 -->
-        <plugin type="com.laoxu.tools.MYSQLSelectByPagePlugin"/>
+        <!--<plugin type="com.laoxu.tools.MYSQLSelectByPagePlugin"/>-->
         <!--<plugin type="com.laoxu.tools.SqlServerSelectByPagePlugin"/>-->
-        <!--<plugin type="com.laoxu.tools.OracleSelectByPagePlugin"/>-->
+        <plugin type="com.laoxu.tools.OracleSelectByPagePlugin"/>
 
         <!-- 此处是将Example改名为Criteria 当然 想改成什么都行 -->
         <plugin type="org.mybatis.generator.plugins.RenameExampleClassPlugin">
@@ -45,6 +45,7 @@
 
         <!-- 使用自定义的注解 依赖jar包 -->
         <commentGenerator type="com.laoxu.tools.MyCommentGenerator"></commentGenerator>
+        <!--<commentGenerator type="com.laoxu.tools.MyCommentGenerator2"></commentGenerator>-->
 
         <!-- jdbc连接信息 -->
         <jdbcConnection
@@ -52,6 +53,8 @@
                 connectionURL="${jdbc.url}"
                 userId="${jdbc.username}"
                 password="${jdbc.password}">
+             <!--针对oracle数据库-->
+            <property name="remarksReporting" value="true"></property>
         </jdbcConnection>
 
         <!-- 生成model模型，对应的包路径，以及文件存放路径(targetProject)，targetProject可以指定具体的路径,如./src/main/java，
@@ -77,10 +80,10 @@
 
         <!-- 生成表 对应的名字 -->
          <!--mysql-->
-        <table tableName="maps" domainObjectName="Maps">
-            <property name="useActualColumnNames" value="true"/>
-            <generatedKey  column="id"  sqlStatement="MySql" identity="true"/>
-        </table>
+        <!--<table tableName="maps" domainObjectName="Maps">-->
+            <!--<property name="useActualColumnNames" value="true"/>-->
+            <!--<generatedKey  column="id"  sqlStatement="MySql" identity="true"/>-->
+        <!--</table>-->
 
         <!-- sqlServer-->
         <!--<table tableName="sys_menu" domainObjectName="SysMenu">-->
@@ -93,6 +96,10 @@
             <!--<property name="useActualColumnNames" value="true"/>-->
             <!--<generatedKey  column="GUID"  sqlStatement="Oracle"   identity="true"/>-->
          <!--</table>-->
+        <table tableName="BDA_FR_T_O_GS_DJ_NSRXX" domainObjectName="BdaFrTOGsDjNsrxx">
+            <property name="useActualColumnNames" value="true"/>
+            <generatedKey  column="GUID"  sqlStatement="Oracle"   identity="true"/>
+         </table>
         <!--<table tableName="BDA_QY_T_O_ZXQYCZMD" domainObjectName="BdaQyTOZxqyczmd">-->
             <!--<property name="useActualColumnNames" value="true"/>-->
             <!--<generatedKey  column="GUID"  sqlStatement="Oracle"   identity="true"/>-->
