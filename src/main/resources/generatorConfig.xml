@@ -92,18 +92,10 @@
         <!--</table>-->
 
         <!-- oracle -->
-        <!--<table tableName="BDA_QY_T_O_ZXQYJSMD" domainObjectName="BdaQyTOZxqyjsmd">-->
-            <!--<property name="useActualColumnNames" value="true"/>-->
-            <!--<generatedKey  column="GUID"  sqlStatement="Oracle"   identity="true"/>-->
-         <!--</table>-->
-        <table tableName="BDA_FR_T_O_GS_DJ_NSRXX" domainObjectName="BdaFrTOGsDjNsrxx">
+        <table tableName="BDA_QY_T_O_ZXQYPYMD" domainObjectName="BdaQyTOZxqypymd">
             <property name="useActualColumnNames" value="true"/>
-            <generatedKey  column="GUID"  sqlStatement="Oracle"   identity="true"/>
+            <generatedKey  column="DGUID"  sqlStatement="Oracle"   identity="true"/>
          </table>
-        <!--<table tableName="BDA_QY_T_O_ZXQYCZMD" domainObjectName="BdaQyTOZxqyczmd">-->
-            <!--<property name="useActualColumnNames" value="true"/>-->
-            <!--<generatedKey  column="GUID"  sqlStatement="Oracle"   identity="true"/>-->
-         <!--</table>-->
         <!--<table tableName="BDA_ZBJJ_T_S_LYSJ" domainObjectName="BdaZbjjTSLysj">-->
             <!--<property name="useActualColumnNames" value="true"/>-->
             <!--<generatedKey  column="id"  sqlStatement="Oracle"   identity="true"/>-->
