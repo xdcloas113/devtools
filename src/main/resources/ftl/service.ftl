@@ -1,7 +1,7 @@
 package ${parentPackageName}.service;
 
 import ${pojo}.${entityName};
-import com.laoxu.utils.json.JsonUtil;
+import com.excel.utils.json.JsonUtil;
 
 import java.util.List;
 import java.util.Map;

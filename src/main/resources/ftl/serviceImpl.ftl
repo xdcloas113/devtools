@@ -6,11 +6,10 @@ import ${pojo}.${entityName};
 import ${pojo}.${entityName}Criteria;
 
 import com.alibaba.fastjson.JSON;
-import com.laoxu.utils.json.ExtLimit;
-import com.laoxu.utils.json.JsonUtil;
-import com.laoxu.utils.status.FinalJson;
-import com.laoxu.tools.StringFirst;
-import com.laoxu.utils.json.Info;
+import com.excel.utils.json.ExtLimit;
+import com.excel.utils.json.JsonUtil;
+import com.excel.utils.status.FinalJson;
+import com.excel.utils.json.Info;
 
 import lombok.extern.apachecommons.CommonsLog;
 import org.springframework.stereotype.Service;

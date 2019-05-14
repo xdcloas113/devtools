@@ -27,9 +27,9 @@
           <!--plugin get set 方法-->
         <plugin type="com.laoxu.tools.LombokPlugin"/>
         <!-- 分页插件 -->
-        <!--<plugin type="com.laoxu.tools.MYSQLSelectByPagePlugin"/>-->
+        <plugin type="com.laoxu.tools.MYSQLSelectByPagePlugin"/>
         <!--<plugin type="com.laoxu.tools.SqlServerSelectByPagePlugin"/>-->
-        <plugin type="com.laoxu.tools.OracleSelectByPagePlugin"/>
+        <!--<plugin type="com.laoxu.tools.OracleSelectByPagePlugin"/>-->
 
         <!-- 此处是将Example改名为Criteria 当然 想改成什么都行 -->
         <plugin type="org.mybatis.generator.plugins.RenameExampleClassPlugin">
@@ -80,10 +80,10 @@
 
         <!-- 生成表 对应的名字 -->
          <!--mysql-->
-        <!--<table tableName="maps" domainObjectName="Maps">-->
-            <!--<property name="useActualColumnNames" value="true"/>-->
-            <!--<generatedKey  column="id"  sqlStatement="MySql" identity="true"/>-->
-        <!--</table>-->
+        <table tableName="zwy_article_data_30" domainObjectName="ZwyArticleData30">
+            <property name="useActualColumnNames" value="true"/>
+            <generatedKey  column="itemid"  sqlStatement="MySql" identity="true"/>
+        </table>
 
         <!-- sqlServer-->
         <!--<table tableName="sys_menu" domainObjectName="SysMenu">-->
@@ -92,10 +92,10 @@
         <!--</table>-->
 
         <!-- oracle -->
-        <table tableName="BDA_QY_T_O_ZXQYPYMD" domainObjectName="BdaQyTOZxqypymd">
-            <property name="useActualColumnNames" value="true"/>
-            <generatedKey  column="DGUID"  sqlStatement="Oracle"   identity="true"/>
-         </table>
+        <!--<table tableName="BDA_QY_T_O_ZXQYPYMD" domainObjectName="BdaQyTOZxqypymd">-->
+            <!--<property name="useActualColumnNames" value="true"/>-->
+            <!--<generatedKey  column="DGUID"  sqlStatement="Oracle"   identity="true"/>-->
+         <!--</table>-->
         <!--<table tableName="BDA_ZBJJ_T_S_LYSJ" domainObjectName="BdaZbjjTSLysj">-->
             <!--<property name="useActualColumnNames" value="true"/>-->
             <!--<generatedKey  column="id"  sqlStatement="Oracle"   identity="true"/>-->

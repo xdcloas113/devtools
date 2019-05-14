@@ -33,7 +33,8 @@ public class ToolsTest {
 
         //需要生成的表名
         String[] tablenames = {
-                "BDA_FR_T_O_GS_DJ_NSRXX"
+                "zwy_article_30",
+                "zwy_article_data_30",
 //                "BDA_QY_T_S_SBQY",
 //                "BDA_QY_T_O_ZXQYCZMD"
 //                "BDA_ZBJJ_T_F_ZBQYMD"
