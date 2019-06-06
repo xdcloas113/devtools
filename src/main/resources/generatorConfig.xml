@@ -80,9 +80,14 @@
 
         <!-- 生成表 对应的名字 -->
          <!--mysql-->
-        <table tableName="zwy_article_data_30" domainObjectName="ZwyArticleData30">
+        <table tableName="policy_release" domainObjectName="PolicyRelease">
             <property name="useActualColumnNames" value="true"/>
-            <generatedKey  column="itemid"  sqlStatement="MySql" identity="true"/>
+            <generatedKey  column="id"  sqlStatement="MySql" identity="true"/>
+        </table>
+
+        <table tableName="policy_release_content" domainObjectName="PolicyReleaseContent">
+            <property name="useActualColumnNames" value="true"/>
+            <!--<generatedKey  column="id"  sqlStatement="MySql" identity="true"/>-->
         </table>
 
         <!-- sqlServer-->

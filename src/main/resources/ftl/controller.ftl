@@ -3,27 +3,27 @@ package ${parentPackageName}.controller;
 import com.alibaba.fastjson.JSON;
 import ${pojo}.${entityName};
 import ${parentPackageName}.service.${entityName}Service;
+
 import lombok.extern.apachecommons.CommonsLog;
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
-
 
 import javax.annotation.Resource;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import com.excel.utils.json.Info;
-import com.excel.utils.json.ExtLimit;
-import com.excel.utils.json.JsonUtil;
-import com.excel.utils.status.FinalJson;
+import ${parentPackageName}.utils.commonJson.Info;
+import ${parentPackageName}.utils.commonJson.ExtLimit;
+import ${parentPackageName}.utils.commonJson.ComJsonUtil;
+import ${parentPackageName}.utils.commonJson.FinalJson;
 
 
 /**
-* @program: gifm-sub
+* @program: gifm-bak
 * @description: 自动生成, 待用户编辑 //TODO:描述待补充
-* @author: 兰芷不芳，荃蕙为茅
+* @author: xdc
 * @create: ${.now}
 **/
 @CommonsLog
@@ -38,52 +38,39 @@ public class ${entityName}Controller {
     /**
     * 获取分页数据
     *
-    * @param jsonUtil 前端请求json
-    * @return JsonUtil
+    * @param comJsonUtil 前端请求json
+    * @return ComJsonUtil
     */
     @RequestMapping(value="/page",method = RequestMethod.POST)
-        public JsonUtil getAllByPR(@RequestBody JsonUtil jsonUtil) throws Exception {
-        JsonUtil jUBean = JSON.parseObject(JSON.toJSONString(jsonUtil),JsonUtil.class);
+    public ComJsonUtil getAllByPR(@RequestParam String comJsonUtil ,@RequestParam Map<String,Object> requestMap) throws Exception {
+        ComJsonUtil jUBean = JSON.parseObject(JSON.toJSONString(comJsonUtil),ComJsonUtil.class);
         Map<String,Object> beanmap = (Map) jUBean.getData();
-        if(beanmap == null){
-            Info info = new Info();
-            info.setStatus(FinalJson.STATUS_NOTACCEPTABLE);
-            info.setMessage("请求失败");
-            jsonUtil.setInfo(info);
-            return jsonUtil;
-        }
         ExtLimit extLimit = jUBean.getExtlimit();
-        int page = extLimit.getPageindex();
-        int rows = extLimit.getPagesize();
-        JsonUtil backJU = ${entityName?uncap_first}Service.selectPage(page, rows, beanmap,jsonUtil);
-        return backJU;
+        if(requestMap.containsKey("page")){
+            extLimit.setPageindex(Integer.valueOf(requestMap.get("page").toString()));
+        }
+        if(requestMap.containsKey("rows")){
+            extLimit.setPagesize(Integer.valueOf(requestMap.get("rows").toString()));
+        }
+        return ${entityName?uncap_first}Service.selectPage(beanmap,jUBean);
     }
-
 
 
     /**
     * 查找一条记录
     *
-    * @param jsonUtil 前端请求json
-    * @return JsonUtil
+    * @param comJsonUtil 前端请求json
+    * @return ComJsonUtil
     */
     @RequestMapping( method = RequestMethod.POST)
-    public JsonUtil find${entityName}(@RequestBody JsonUtil jsonUtil) {
-        JsonUtil jUBean = JSON.parseObject(JSON.toJSONString(jsonUtil),JsonUtil.class);
+    public ComJsonUtil find${entityName}(@RequestBody ComJsonUtil comJsonUtil) {
+        ComJsonUtil jUBean = JSON.parseObject(JSON.toJSONString(comJsonUtil),ComJsonUtil.class);
         Map<String,Object> beanmap = (Map)jUBean.getData();
-        ${entityName} ${entityName?uncap_first} = ${entityName?uncap_first}Service.getById(beanmap.get("id").toString());
-        Info info = new Info();
-        if(beanmap == null || ${entityName?uncap_first} == null){
-            info.setStatus(FinalJson.STATUS_NOTACCEPTABLE);
-            info.setMessage("请求失败");
-            jsonUtil.setInfo(info);
-            return jsonUtil;
-        }
-        info.setStatus(FinalJson.STATUS_OK);
-        info.setMessage("请求成功");
-        jsonUtil.setInfo(info);
-        jsonUtil.setData(${entityName?uncap_first});
-        return jsonUtil;
+        ${entityName} bean= ${entityName?uncap_first}Service.getById(Integer.parseInt( beanmap.get("id").toString() ));
+        comJsonUtil.setData(bean != null ? bean : "根据主键未查询到数据");
+        comJsonUtil.getInfo().setStatus(bean != null ?FinalJson.STATUS_OK : FinalJson.STATUS_NOTACCEPTABLE);
+        comJsonUtil.getInfo().setMessage(bean != null ? "查询成功" : "查询失败" );
+        return comJsonUtil;
     }
 
 
@@ -91,24 +78,20 @@ public class ${entityName}Controller {
     /**
     * 新增一条记录
     *
-    * @param jsonUtil 前端请求json
-    * @return JsonUtil
+    * @param comJsonUtil 前端请求json
+    * @return ComJsonUtil
     */
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public JsonUtil save${entityName}(@RequestBody JsonUtil jsonUtil) throws Exception {
-        JsonUtil jUBean = JSON.parseObject(JSON.toJSONString(jsonUtil),JsonUtil.class);
+    public ComJsonUtil save${entityName}(@RequestBody ComJsonUtil comJsonUtil) throws Exception {
+        ComJsonUtil jUBean = JSON.parseObject(JSON.toJSONString(comJsonUtil),ComJsonUtil.class);
         Map<String,Object> beanmap = (Map)jUBean.getData();
         ${entityName} ${entityName?uncap_first} = new ${entityName}();
         BeanUtils.copyProperties(beanmap,${entityName?uncap_first});
         int res = ${entityName?uncap_first}Service.save(${entityName?uncap_first});
-        if (res != 1) {
-            jsonUtil.getInfo().setStatus(FinalJson.STATUS_NOTACCEPTABLE);
-            jsonUtil.getInfo().setMessage("新增失败");
-            return jsonUtil;
-        }
-        jsonUtil.getInfo().setStatus(FinalJson.STATUS_OK);
-        jsonUtil.getInfo().setMessage("新增成功");
-        return jsonUtil;
+        comJsonUtil.setData(res==1 ? ${entityName?uncap_first} : "");
+        comJsonUtil.getInfo().setStatus(res==1 ? FinalJson.STATUS_OK : FinalJson.STATUS_NOTACCEPTABLE);
+        comJsonUtil.getInfo().setMessage(res==1 ?"新增成功" : "添加失败");
+        return comJsonUtil;
     }
 
 
@@ -116,12 +99,12 @@ public class ${entityName}Controller {
     /**
     * 修改一条记录
     *
-    * @param jsonUtil 前端请求json
-    * @return JsonUtil
+    * @param comJsonUtil 前端请求json
+    * @return ComJsonUtil
     */
     @RequestMapping(method = RequestMethod.PUT)
-    public JsonUtil update${entityName}(@RequestBody JsonUtil jsonUtil) throws Exception{
-        JsonUtil jUBean = JSON.parseObject(JSON.toJSONString(jsonUtil),JsonUtil.class);
+    public ComJsonUtil update${entityName}(@RequestBody ComJsonUtil comJsonUtil) throws Exception{
+        ComJsonUtil jUBean = JSON.parseObject(JSON.toJSONString(comJsonUtil),ComJsonUtil.class);
         Map<String,Object> beanmap = (Map)jUBean.getData();
         ${entityName} ${entityName?uncap_first} = new ${entityName}();
         BeanUtils.copyProperties(beanmap,${entityName?uncap_first});
@@ -129,38 +112,37 @@ public class ${entityName}Controller {
         Info info = new Info();
         info.setStatus(res > 0 ?  FinalJson.STATUS_OK : FinalJson.STATUS_NOTACCEPTABLE);
         info.setMessage(res > 0 ? "更新失败" : "更新失败");
-        jsonUtil.setInfo(info);
-        return jsonUtil;
+        comJsonUtil.setInfo(info);
+        return comJsonUtil;
     }
-
 
     /**
     * 删除一条记录
     *
-    * @param jsonUtil 前端请求json
-    * @return JsonUtil
+    * @param comJsonUtil 前端请求json
+    * @return ComJsonUtil
     */
     @RequestMapping( method = RequestMethod.DELETE)
-    public JsonUtil delete${entityName}(@RequestBody JsonUtil jsonUtil) {
-        JsonUtil jUBean = JSON.parseObject(JSON.toJSONString(jsonUtil),JsonUtil.class);
+    public ComJsonUtil delete${entityName}(@RequestBody ComJsonUtil comJsonUtil) {
+        ComJsonUtil jUBean = JSON.parseObject(JSON.toJSONString(comJsonUtil),ComJsonUtil.class);
         Map<String,Object> beanmap = (Map)jUBean.getData();
-        int res = ${entityName?uncap_first}Service.removeByID(beanmap.get("id").toString());
+        int res = ${entityName?uncap_first}Service.removeByID(Integer.parseInt(beanmap.get("id").toString()));
         Info info = new Info();
         info.setStatus(res > 0 ?  FinalJson.STATUS_OK : FinalJson.STATUS_NOTACCEPTABLE);
         info.setMessage(res > 0 ? "删除成功" : "删除失败");
-        jsonUtil.setInfo(info);
-        return jsonUtil;
+        comJsonUtil.setInfo(info);
+        return comJsonUtil;
     }
 
     /**
     * 批量删除记录
     *
-    * @param jsonUtil
-    * @return ServerResponse
+    * @param comJsonUtil
+    * @return ComJsonUtil
     */
     @RequestMapping(value = "/${entityName?uncap_first}s", method = RequestMethod.DELETE)
-    public JsonUtil delete${entityName}s(@RequestBody JsonUtil jsonUtil) {
-        JsonUtil jUBean = JSON.parseObject(JSON.toJSONString(jsonUtil),JsonUtil.class);
+    public ComJsonUtil delete${entityName}s(@RequestBody ComJsonUtil comJsonUtil) {
+        ComJsonUtil jUBean = JSON.parseObject(JSON.toJSONString(comJsonUtil),ComJsonUtil.class);
         Map<String,Object> beanmap = (Map)jUBean.getData();
         String ids = beanmap.get("ids").toString();
         String[] strings = StringUtils.split(ids, ",");
@@ -169,8 +151,8 @@ public class ${entityName}Controller {
             deleteIdList.add(strings[i]);
         }
         int res = ${entityName?uncap_first}Service.removeByIDs(deleteIdList);//TODO:该方法对应的sql暂时需要手工书写
-        jsonUtil.getInfo().setMessage( res > 0 ? "删除成功" : "删除失败");
-        jsonUtil.getInfo().setStatus( res > 0 ? FinalJson.STATUS_OK : FinalJson.STATUS_NOTACCEPTABLE);
-        return jsonUtil;
+        comJsonUtil.getInfo().setMessage( res > 0 ? "删除成功" : "删除失败");
+        comJsonUtil.getInfo().setStatus( res > 0 ? FinalJson.STATUS_OK : FinalJson.STATUS_NOTACCEPTABLE);
+        return comJsonUtil;
     }
 }

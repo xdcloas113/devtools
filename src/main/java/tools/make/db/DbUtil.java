@@ -67,7 +67,11 @@ public enum DbUtil {
 		String sql = connSqlTemplate.getKeyColumnSql(tableName);
 		log.debug("\n{}",sql);
 		List<Map<String, Object>> list = exeute(sql);
-		String pk = list.get(0).get("COLUMN_NAME").toString();
+		String pk ="";
+		if (!list.isEmpty()) {
+			 pk = list.get(0).get("COLUMN_NAME").toString();
+			 Tools.columnType = list.get(0).get("JDBC_TYPE").toString();
+		}
 //		log.debug("\n{}",pk);
 		return pk;
 	}

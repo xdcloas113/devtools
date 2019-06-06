@@ -27,6 +27,8 @@ public class Tools {
     private String pk = null;
     private String comments = null;
 
+    public static String columnType =null; //主键类型
+
     public static Map<String, String> db2JavaMap;//映射为public可配置
 
     private static Configuration configuration = null;
@@ -106,6 +108,7 @@ public class Tools {
         ftlmap.put("pojo",pojo);//实体位置
         ftlmap.put("entityName",entityName);//实体名称
         ftlmap.put("tableName",tableName);//表名
+        ftlmap.put("columnType",columnType);//主键类型
         ftlmap.put("comments",comments);
         ftlmap.put("paramName",paramName);
         ftlmap.put("pk",pk);

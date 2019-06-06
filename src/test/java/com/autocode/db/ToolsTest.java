@@ -33,8 +33,8 @@ public class ToolsTest {
 
         //需要生成的表名
         String[] tablenames = {
-                "zwy_article_30",
-                "zwy_article_data_30",
+                  "policy_release_content",
+//                  "policy_release",
 //                "BDA_QY_T_S_SBQY",
 //                "BDA_QY_T_O_ZXQYCZMD"
 //                "BDA_ZBJJ_T_F_ZBQYMD"
@@ -44,6 +44,7 @@ public class ToolsTest {
         };
         Arrays.stream(tablenames).forEach(s -> {
             tool.create(s);
+            //todo : 这个主键的错误还没处理，只能处理有主键的
             tool.doController();
             tool.doService();
             tool.doServiceImpl();
