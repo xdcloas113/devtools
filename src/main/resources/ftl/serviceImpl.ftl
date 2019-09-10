@@ -307,6 +307,7 @@ public class ${entityName}ServiceImpl implements ${entityName}Service {
         <#elseif nameOfClass("${entityName}.id") == "int">
         return ${entityName?uncap_first}Mapper.deleteByPrimaryKey(id);
         </#if>
+        return ${entityName?uncap_first}Mapper.deleteByPrimaryKey(id);
     }
 
     /**
@@ -348,13 +349,8 @@ public class ${entityName}ServiceImpl implements ${entityName}Service {
     **/
     @Override
     public ${entityName} getById(Integer id) {
-    <#if nameOfClass("${entityName}.id") == "String">
-        return ${entityName?uncap_first}Mapper.selectByPrimaryKey(id+"");
-    <#elseif nameOfClass("${entityName}.id") == "Long">
-        return ${entityName?uncap_first}Mapper.selectByPrimaryKey(Long.parseLong(id+""));
-    <#elseif nameOfClass("${entityName}.id") == "int">
         return ${entityName?uncap_first}Mapper.selectByPrimaryKey(id);
-    </#if>
+
     }
 
 

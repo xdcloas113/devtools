@@ -1,9 +1,10 @@
 package ${parentPackageName}.controller;
 
-import com.alibaba.fastjson.JSON;
+
 import ${pojo}.${entityName};
 import ${parentPackageName}.service.${entityName}Service;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import lombok.extern.apachecommons.CommonsLog;
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.util.StringUtils;
@@ -14,6 +15,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import ${parentPackageName}.utils.JsonMapper;
+import ${parentPackageName}.utils.commonJson.ComJsonUtil;
 import ${parentPackageName}.utils.commonJson.Info;
 import ${parentPackageName}.utils.commonJson.ExtLimit;
 import ${parentPackageName}.utils.commonJson.ComJsonUtil;
@@ -21,7 +24,7 @@ import ${parentPackageName}.utils.commonJson.FinalJson;
 
 
 /**
-* @program: gifm-bak
+* @program:
 * @description: 自动生成, 待用户编辑 //TODO:描述待补充
 * @author: xdc
 * @create: ${.now}
@@ -43,7 +46,7 @@ public class ${entityName}Controller {
     */
     @RequestMapping(value="/page",method = RequestMethod.POST)
     public ComJsonUtil getAllByPR(@RequestParam String comJsonUtil ,@RequestParam Map<String,Object> requestMap) throws Exception {
-        ComJsonUtil jUBean = JSON.parseObject(JSON.toJSONString(comJsonUtil),ComJsonUtil.class);
+        ComJsonUtil jUBean = JsonMapper.string2Obj(JsonMapper.obj2String(comJsonUtil),new TypeReference<ComJsonUtil>() {});
         Map<String,Object> beanmap = (Map) jUBean.getData();
         ExtLimit extLimit = jUBean.getExtlimit();
         if(requestMap.containsKey("page")){
@@ -64,7 +67,7 @@ public class ${entityName}Controller {
     */
     @RequestMapping( method = RequestMethod.POST)
     public ComJsonUtil find${entityName}(@RequestBody ComJsonUtil comJsonUtil) {
-        ComJsonUtil jUBean = JSON.parseObject(JSON.toJSONString(comJsonUtil),ComJsonUtil.class);
+        ComJsonUtil jUBean = JsonMapper.string2Obj(JsonMapper.obj2String(comJsonUtil),new TypeReference<ComJsonUtil>() {});
         Map<String,Object> beanmap = (Map)jUBean.getData();
         ${entityName} bean= ${entityName?uncap_first}Service.getById(Integer.parseInt( beanmap.get("id").toString() ));
         comJsonUtil.setData(bean != null ? bean : "根据主键未查询到数据");
@@ -83,7 +86,7 @@ public class ${entityName}Controller {
     */
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ComJsonUtil save${entityName}(@RequestBody ComJsonUtil comJsonUtil) throws Exception {
-        ComJsonUtil jUBean = JSON.parseObject(JSON.toJSONString(comJsonUtil),ComJsonUtil.class);
+        ComJsonUtil jUBean = JsonMapper.string2Obj(JsonMapper.obj2String(comJsonUtil),new TypeReference<ComJsonUtil>() {});
         Map<String,Object> beanmap = (Map)jUBean.getData();
         ${entityName} ${entityName?uncap_first} = new ${entityName}();
         BeanUtils.copyProperties(beanmap,${entityName?uncap_first});
@@ -104,7 +107,7 @@ public class ${entityName}Controller {
     */
     @RequestMapping(method = RequestMethod.PUT)
     public ComJsonUtil update${entityName}(@RequestBody ComJsonUtil comJsonUtil) throws Exception{
-        ComJsonUtil jUBean = JSON.parseObject(JSON.toJSONString(comJsonUtil),ComJsonUtil.class);
+        ComJsonUtil jUBean = JsonMapper.string2Obj(JsonMapper.obj2String(comJsonUtil),new TypeReference<ComJsonUtil>() {});
         Map<String,Object> beanmap = (Map)jUBean.getData();
         ${entityName} ${entityName?uncap_first} = new ${entityName}();
         BeanUtils.copyProperties(beanmap,${entityName?uncap_first});
@@ -124,7 +127,7 @@ public class ${entityName}Controller {
     */
     @RequestMapping( method = RequestMethod.DELETE)
     public ComJsonUtil delete${entityName}(@RequestBody ComJsonUtil comJsonUtil) {
-        ComJsonUtil jUBean = JSON.parseObject(JSON.toJSONString(comJsonUtil),ComJsonUtil.class);
+        ComJsonUtil jUBean = JsonMapper.string2Obj(JsonMapper.obj2String(comJsonUtil),new TypeReference<ComJsonUtil>() {});
         Map<String,Object> beanmap = (Map)jUBean.getData();
         int res = ${entityName?uncap_first}Service.removeByID(Integer.parseInt(beanmap.get("id").toString()));
         Info info = new Info();
@@ -142,7 +145,7 @@ public class ${entityName}Controller {
     */
     @RequestMapping(value = "/${entityName?uncap_first}s", method = RequestMethod.DELETE)
     public ComJsonUtil delete${entityName}s(@RequestBody ComJsonUtil comJsonUtil) {
-        ComJsonUtil jUBean = JSON.parseObject(JSON.toJSONString(comJsonUtil),ComJsonUtil.class);
+        ComJsonUtil jUBean = JsonMapper.string2Obj(JsonMapper.obj2String(comJsonUtil),new TypeReference<ComJsonUtil>() {});
         Map<String,Object> beanmap = (Map)jUBean.getData();
         String ids = beanmap.get("ids").toString();
         String[] strings = StringUtils.split(ids, ",");
