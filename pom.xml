@@ -37,7 +37,7 @@
         <junit.version>4.12</junit.version>
         <freemarker.version>2.3.23</freemarker.version>
 		<jersey.version>2.18</jersey.version>
-        <spring.version>4.3.10.RELEASE</spring.version>
+        <spring.version>5.2.22.RELEASE</spring.version>
         <lombok.ver>1.16.22</lombok.ver>
         <mysql5.ver>5.1.35</mysql5.ver>
         <mysql8.ver>8.0.11</mysql8.ver>
