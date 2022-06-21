@@ -40,7 +40,7 @@
         <spring.version>4.3.10.RELEASE</spring.version>
         <lombok.ver>1.16.22</lombok.ver>
         <mysql5.ver>5.1.35</mysql5.ver>
-        <mysql8.ver>8.0.11</mysql8.ver>
+        <mysql8.ver>8.0.28</mysql8.ver>
     </properties>
 
     <dependencies>
@@ -286,7 +286,7 @@
                     <dependency>
                         <groupId>mysql</groupId>
                         <artifactId>mysql-connector-java</artifactId>
-                        <version>5.1.44</version>
+                        <version>8.0.28</version>
                     </dependency>
                 </dependencies>
             </plugin>
